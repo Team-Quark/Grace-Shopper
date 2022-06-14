@@ -11,19 +11,8 @@ async function seed() {
   console.log('db synced!')
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
-
-  console.log(`seeded ${users.length} users`)
+  const users = await User.create({ email: 'cody@gmail.com', password: '123', firstName: 'cody', lastName: 'martin', address: '123 Main St, NY, 12312', cart: [{id:1, size: 2},{id:2, size: 10}]})
   console.log(`seeded successfully`)
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
-  }
 }
 
 /*
