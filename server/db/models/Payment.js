@@ -37,4 +37,5 @@ const Payment = db.define('payment', {
   },
 });
 
+//exporting Payment Model
 module.exports = Payment;
