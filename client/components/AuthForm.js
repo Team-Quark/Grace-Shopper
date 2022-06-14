@@ -6,7 +6,10 @@ import { authenticate } from '../store';
  * COMPONENT
  */
 
+<<<<<<< HEAD
 //change
+=======
+>>>>>>> d85ece87bc9c9d7c01ca9e422859b110f7d35a3c
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
