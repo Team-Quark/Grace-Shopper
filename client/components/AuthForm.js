@@ -6,13 +6,34 @@ import { authenticate } from '../store';
  * COMPONENT
  */
 
-//change
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
+        {name === 'signup' && (
+          <div>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name</small>
+              </label>
+              <input name="firstName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" type="text"></input>
+            </div>
+            <div>
+              <label htmlFor="address">
+                <small>Address</small>
+              </label>
+              <input name="address" type="text"></input>
+            </div>
+          </div>
+        )}
         <div>
           <label htmlFor="email">
             <small>email</small>
