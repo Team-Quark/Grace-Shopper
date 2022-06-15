@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Payment },
+  models: { User, Payment, Product },
 } = require('../server/db');
 
 /**
@@ -14,10 +14,28 @@ async function seed() {
   console.log('db synced!');
 
   // Creating Users
-  const users = await User.create({ email: 'cody@gmail.com', password: '123', firstName: 'cody', lastName: 'martin', address: '123 Main St, NY, 12312', cart: [{id:1, size: 2},{id:2, size: 10}]})
-  console.log(`seeded successfully`)
-}
+  const users = await User.create({
+    email: 'cody@gmail.com',
+    password: '123',
+    firstName: 'cody',
+    lastName: 'martin',
+    address: '123 Main St, NY, 12312',
+    cart: [
+      { id: 1, size: 2 },
+      { id: 2, size: 10 },
+    ],
+  });
 
+  const products = await Product.create({
+    name: 'Yeezy',
+    imageUrl:
+      'https://i.pinimg.com/564x/35/9d/1d/359d1d33ca0cca4e58b7a8113c2977c1.jpg',
+    description: 'kanye',
+    price: 301.5,
+    availableSize: 10,
+  });
+  console.log(`seeded successfully`);
+}
 /*
  We've separated the `seed` function from the `runSeed` function.
  This way we can isolate the error handling and exit trapping.
