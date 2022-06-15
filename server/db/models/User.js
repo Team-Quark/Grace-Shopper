@@ -31,7 +31,7 @@ const User = db.define('user', {
     allowNull: false
   },
   cart: {
-    type: Sequelize.ARRAY(Sequelize.JSON(Sequelize.STRING)),
+    type: Sequelize.ARRAY(Sequelize.JSON(Sequelize.STRING)), //[{id: 1, size:'10', price: '100', imageUrl: 'imageUrl'}, {id: 10, size: '10'}]
   },
   admin: {
     type: Sequelize.BOOLEAN,
@@ -69,7 +69,7 @@ User.authenticate = async function({ email, password }){
 User.findByToken = async function(token) {
   try {
     const {id} = await jwt.verify(token, process.env.JWT)
-    const user = User.findByPk(id)
+    const user = await User.findByPk(id)
     if (!user) {
       throw 'nooo'
     }

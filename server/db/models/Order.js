@@ -7,10 +7,6 @@ const Order = db.define('order', {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false,
   },
-  shoeSize: {
-    type: Sequelize.FLOAT,
-    allowNull: false,
-  },
   shippingAddress: {
     type: Sequelize.STRING,
     allowNull: false,
