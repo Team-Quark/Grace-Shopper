@@ -4,11 +4,7 @@ const db = require('../db');
 
 const Order = db.define('order', {
   products: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    allowNull: false,
-  },
-  shoeSize: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.ARRAY(Sequelize.TEXT),
     allowNull: false,
   },
   shippingAddress: {
