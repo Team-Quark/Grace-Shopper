@@ -9,6 +9,14 @@ const Product = require('./models/Product');
 
 //associations could go here!
 
+User.hasMany(Payment)
+User.hasMany(Order)
+
+Payment.belongsTo(User)
+Order.belongsTo(User)
+
+//Maybe include Product in the future, but right now -> product holds just storage information
+
 module.exports = {
   db,
   models: {
