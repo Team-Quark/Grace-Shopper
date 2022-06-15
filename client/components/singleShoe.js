@@ -25,6 +25,8 @@ class SingleShoe extends React.Component {
           <p>Available Size: {this.props.singleShoe.availableSize}</p>
           <br />
           <br />
+
+          <button>Add to Cart</button>
         </center>
       </div>
     );
