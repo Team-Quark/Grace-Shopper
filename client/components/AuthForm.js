@@ -92,6 +92,7 @@ const mapDispatch = (dispatch) => {
         formData.lastName = evt.target.lastName.value;
         formData.address = evt.target.address.value;
       }
+      console.log('FORMDATA: ', formData);
       dispatch(authenticate(formData, formName));
     },
   };

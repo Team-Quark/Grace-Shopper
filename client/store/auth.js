@@ -53,6 +53,7 @@ export const logout = () => {
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
+      console.log(action.auth);
       return action.auth;
     default:
       return state;
