@@ -6,6 +6,7 @@ import Home from './components/Home';
 import AllShoes from './components/AllShoes';
 import { me } from './store';
 import SingleShoe from './components/singleShoe';
+import Cart from './components/Cart';
 
 /**
  * COMPONENT
@@ -17,7 +18,6 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-
     return (
       <div>
         {isLoggedIn ? (
@@ -25,6 +25,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route exact path="/shoes" component={AllShoes} />
             <Route exact path="/shoes/:id" component={SingleShoe} />
+            <Route exact path="/cart" component={Cart} />
             <Redirect to="/home" />
           </Switch>
         ) : (

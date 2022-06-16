@@ -5,12 +5,14 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import allshoes from './allshoes'
 import singleShoeReducer from './singleShoe';
+import cart from './cart'
 
 
 const reducer = combineReducers({
   auth,
   allshoes,
   singleShoeReducer,
+  cart
 })
 
 const middleware = composeWithDevTools(
