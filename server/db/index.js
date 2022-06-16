@@ -11,9 +11,11 @@ const Product = require('./models/Product');
 
 User.hasMany(Payment)
 User.hasMany(Order)
+Payment.hasMany(Order)
 
 Payment.belongsTo(User)
 Order.belongsTo(User)
+Order.belongsTo(Payment)
 
 //Maybe include Product in the future, but right now -> product holds just storage information
 
