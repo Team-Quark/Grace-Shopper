@@ -25,7 +25,6 @@ const Cart = props => {
         </div>
     )
 }
-
 const mapState = state => {
     return {
         user: state.auth,
