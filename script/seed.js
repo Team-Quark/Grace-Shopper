@@ -110,66 +110,6 @@ async function seed() {
       expDate: "2025-06-01",
       securityCode: "153",
     },
-    {
-      CardType: "VISA",
-      ccNo: "4024007124403063",
-      expDate: "2023-02-01",
-      securityCode: "207",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4929046960562505",
-      expDate: "2027-02-01",
-      securityCode: "816",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4916479079302064",
-      expDate: "2026-07-01",
-      securityCode: "364",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4556627816535777",
-      expDate: "2026-04-01",
-      securityCode: "400",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4539944413369548",
-      expDate: "2026-11-01",
-      securityCode: "456",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4485878132912788",
-      expDate: "2024-09-01",
-      securityCode: "125",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4539105828766088",
-      expDate: "2024-01-01",
-      securityCode: "106",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4916243132720138",
-      expDate: "2022-10-01",
-      securityCode: "661",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4024007153678429",
-      expDate: "2023-11-01",
-      securityCode: "588",
-    },
-    {
-      CardType: "VISA",
-      ccNo: "4092518795033887",
-      expDate: "2025-06-01",
-      securityCode: "153",
-    },
   ];
   // Getting All the users added to the db
   let findAllUsers = await User.findAll();
