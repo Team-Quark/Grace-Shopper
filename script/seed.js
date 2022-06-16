@@ -29,7 +29,7 @@ async function seed() {
     admin: true,
   });
 
-  for (let uId = 0; uId < 11; uId++) {
+  for (let uId = 0; uId < 21; uId++) {
     await User.create({
       email: `cody${uId + 1}@gmail.com`,
       password: "123",
@@ -47,6 +47,66 @@ async function seed() {
 
   // fake credit card numbers
   const fakeCCArr = [
+    {
+      CardType: "VISA",
+      ccNo: "4024007124403063",
+      expDate: "2023-02-01",
+      securityCode: "207",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4929046960562505",
+      expDate: "2027-02-01",
+      securityCode: "816",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4916479079302064",
+      expDate: "2026-07-01",
+      securityCode: "364",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4556627816535777",
+      expDate: "2026-04-01",
+      securityCode: "400",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4539944413369548",
+      expDate: "2026-11-01",
+      securityCode: "456",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4485878132912788",
+      expDate: "2024-09-01",
+      securityCode: "125",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4539105828766088",
+      expDate: "2024-01-01",
+      securityCode: "106",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4916243132720138",
+      expDate: "2022-10-01",
+      securityCode: "661",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4024007153678429",
+      expDate: "2023-11-01",
+      securityCode: "588",
+    },
+    {
+      CardType: "VISA",
+      ccNo: "4092518795033887",
+      expDate: "2025-06-01",
+      securityCode: "153",
+    },
     {
       CardType: "VISA",
       ccNo: "4024007124403063",
@@ -220,6 +280,16 @@ async function seed() {
     description: "Lorem Ipsum",
   });
 
+  for(let prId = 0; prId < 11; prId++ ){
+    await Product.create({
+
+      name: `Shoe ${prId + 1} `,
+      price: 200,
+      availableSize: (Math.floor(Math.random() * 8) + 7),
+      description: "Lorem Ipsum",
+    });
+  }
+
   console.log(`seeded Products successfully`);
 
   const allProducts = await Product.findAll();
@@ -237,7 +307,7 @@ async function seed() {
     return result;
   }
 
-  for (let oId = 0; oId < 11; oId++) {
+  for (let oId = 0; oId < 21; oId++) {
     // associating a random user to the order
     let randomUser =
       findAllUsers[Math.floor(Math.random() * findAllUsers.length)];
