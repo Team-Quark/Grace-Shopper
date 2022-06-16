@@ -6,13 +6,34 @@ import { authenticate } from '../store';
  * COMPONENT
  */
 
-//change
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
+        {name === 'signup' && (
+          <div>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name</small>
+              </label>
+              <input name="firstName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" type="text"></input>
+            </div>
+            <div>
+              <label htmlFor="address">
+                <small>Address</small>
+              </label>
+              <input name="address" type="text"></input>
+            </div>
+          </div>
+        )}
         <div>
           <label htmlFor="email">
             <small>email</small>
@@ -62,9 +83,17 @@ const mapDispatch = (dispatch) => {
     handleSubmit(evt) {
       evt.preventDefault();
       const formName = evt.target.name;
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
-      dispatch(authenticate(email, password, formName));
+      const formData = {
+        email: evt.target.email.value,
+        password: evt.target.password.value,
+      };
+      if (formName === 'signup') {
+        formData.firstName = evt.target.firstName.value;
+        formData.lastName = evt.target.lastName.value;
+        formData.address = evt.target.address.value;
+      }
+      console.log('FORMDATA: ', formData);
+      dispatch(authenticate(formData, formName));
     },
   };
 };

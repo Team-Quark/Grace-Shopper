@@ -3,7 +3,6 @@ const db = require('../db')
 
 
 const Product = db.define('product', {
-
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -30,5 +29,21 @@ const Product = db.define('product', {
   },
 
 })
+
+Product.findItem = async function(list){
+  try{
+    const data = await Product.findAll({
+      where: {
+        id: {
+          [Sequelize.Op.in]: list
+        }
+      }
+    })
+    return data;
+  } catch(e){
+    const error = Error('bad list')
+    throw error;
+  }
+}
 
 module.exports = Product
