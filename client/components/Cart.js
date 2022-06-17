@@ -6,12 +6,15 @@ import {me} from  '../store';
 const Cart = (props) => {
   const [cart, setCart] = useState([]);
   useEffect(() => {
-  // if(!props.user.id && localStorage.getItem('token')){
-    // }
+  if(!props.user.id && localStorage.getItem('token')){
+    props.authToken()
+    }
     // console.log(localStorage.getItem('token'))
-    if (!props.user.id && localStorage.getItem('token')) {
+    if ( localStorage.getItem('token')) {
+      // if (!props.user.id && localStorage.getItem('token')) {
       console.log('we here')
-       props.authToken()
+       console.log(props.cart)
+       console.log(props.user)
 
 // console.log( props.authToken())
 
