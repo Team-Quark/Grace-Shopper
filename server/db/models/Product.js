@@ -21,13 +21,6 @@ const Product = db.define('product', {
     type: Sequelize.FLOAT,
     allowNull: false
   },
-  availableSize: {
-    type: Sequelize.FLOAT,
-    validate: {
-      len: [1,15],
-    }
-  },
-
 })
 
 Product.findItem = async function(list){
