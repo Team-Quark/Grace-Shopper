@@ -16,6 +16,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/cart', async (req,res,next) => {
+  try{
+    const products = await Product.findItem(req.body.list);
+    res.json(products)
+  } catch(e){
+    next(e)
+  }
+})
+
 router.post('/cart', async (req,res,next) => {
   try{
     const products = await Product.findItem(req.body.list);
