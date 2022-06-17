@@ -27,7 +27,8 @@ export const fetchAllUsers = () => async (dispatch) => {
   return dispatch(ALL_USERS(res.data));
 };
 
-export const addNewProduct = (product, history) => {
+export const addNewProduct = (product) => {
+  console.log('hey add new product is running');
   return async (dispatch) => {
     const token = window.localStorage.getItem('token');
     let res;
@@ -41,11 +42,10 @@ export const addNewProduct = (product, history) => {
     }
 
     return dispatch(ADD_PRODUCT(res.body));
-    // history.push('/shoes');
   };
 };
 
-const initialState = [];
+const initialState = { users: [], product: {} };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
       console.log('STATE STATE STATE ACTION.USERS ', action.users.data);
       return action.users;
     case NEW_PRODUCT:
-      return [...state, action.product];
+      return { ...state, product: action.product };
     default:
       return state;
   }
