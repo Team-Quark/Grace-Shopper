@@ -1,14 +1,16 @@
 const router = require('express').Router();
-const { models: { Product }} = require('../db');
+const {
+  models: { Product, User },
+} = require('../db');
 module.exports = router;
 
-router.get('/', async (req,res,next) => {
-    try {
-        const shoes = await Product.findAll();
-        res.json(shoes);
-    } catch (e){
-        next(e)
-    }
+router.get('/', async (req, res, next) => {
+  try {
+    const shoes = await Product.findAll();
+    res.json(shoes);
+  } catch (e) {
+    next(e);
+  }
 });
 
 //SingleShoe
@@ -18,6 +20,19 @@ router.get('/:id', async (req, res, next) => {
     res.send(singleShoe);
   } catch (err) {
     next(err);
+  }
+});
+
+//ADDING A PRODUCT
+router.post('/', async (req, res, next) => {
+  try {
+    const { admin } = await User.findByToken(req.headers.authorization);
+    if (!admin) {
+      return res.status(403).send('Admin login required');
+    }
+    res.status(201).send(await Product.create(req.body));
+  } catch (error) {
+    next(error);
   }
 });
 
