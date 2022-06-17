@@ -23,8 +23,22 @@ async function seed() {
     address: '123 Main St, NY, 12312',
 
     cart: [
-      { id: 1, size: 2 },
-      { id: 2, size: 10 },
+      {
+        imageUrl:
+          'https://images.stockx.com/images/adidas-yeezy-boost-700-hi-red-red.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=avif&auto=compress&dpr=1&trim=color&updated_at=1655130455&q=80',
+        name: 'adidas Yeezy Boost 700 Hi-Res Red',
+        price: 344,
+        availableSize: 9.5,
+        description: 'Lorem Ipsum',
+      },
+      {
+        imageUrl:
+          'https://images.stockx.com/images/Air-Jordan-1-Retro-High-OG-Visionaire.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=avif&auto=compress&dpr=1&trim=color&updated_at=1654610623&q=80',
+        name: `Jordan 1 Retro High OG Visionaire`,
+        price: 214,
+        availableSize: 8,
+        description: 'Lorem Ipsum',
+      },
     ],
 
     admin: true,

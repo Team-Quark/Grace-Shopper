@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+// Action Types
 const GET_CART = 'GET_CART';
 
+// Action Creators
 const CART_ITEMS = (cart) => ({
     type: GET_CART,
     cart
