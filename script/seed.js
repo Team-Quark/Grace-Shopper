@@ -277,7 +277,7 @@ async function seed() {
       total: orderdProductsArr.reduce(({ price }, total) => {
         return price + total;
       }, 0),
-      orderStatus: ['Open', 'Fulfilled', 'Shipped', 'Delivered'][
+      orderStatus: ['Open', 'Closed'][
         Math.floor(Math.random() * 4)
       ],
       payMethod: userPayMethod.length

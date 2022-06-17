@@ -39,9 +39,6 @@ const User = db.define('user', {
       len: 1,
     },
   },
-  cart: {
-    type: Sequelize.ARRAY(Sequelize.JSON(Sequelize.TEXT)), //[{id: 1, size:'10', price: '100', imageUrl: 'imageUrl'}, {id: 10, size: '10'}]
-  },
   admin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
