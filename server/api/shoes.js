@@ -40,7 +40,6 @@ router.post('/', async (req, res, next) => {
 
 //DELETING A PRODUCT
 router.delete('/:id', async (req, res, next) => {
-  console.log('==============', req.headers, req.body);
   try {
     // console.log(req.headers.authorization);
     const { admin } = await User.findByToken(req.headers.authorization);
