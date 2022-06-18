@@ -20,7 +20,7 @@ const AllShoes = (props) => {
                             <h1>{shoe.name}</h1>
                             <h3>$${shoe.price}</h3>
                             <h5>{shoe.description}</h5>
-                            <img src={shoe.imageUrl} />    
+                            <img src={shoe.imageUrl} width={400}/>    
                         </ Link> 
                     </div>
                 )

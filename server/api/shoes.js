@@ -25,9 +25,9 @@ router.get('/:id', async (req, res, next) => {
 
 //ADDING A PRODUCT
 router.post('/', async (req, res, next) => {
-  console.log('==============', req.headers, req.body);
+  // console.log('==============', req.headers, req.body);
   try {
-    console.log(req.headers.authorization);
+    // console.log(req.headers.authorization);
     const { admin } = await User.findByToken(req.headers.authorization);
     if (!admin) {
       return res.status(403).send('Admin login required');

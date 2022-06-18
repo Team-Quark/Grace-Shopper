@@ -25,7 +25,7 @@ const initialState = [];
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS:
-      console.log('STATE STATE STATE ACTION.USERS ', action.users.data);
+      // console.log('STATE STATE STATE ACTION.USERS ', action.users.data);
       return action.users;
     default:
       return state;
