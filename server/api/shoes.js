@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Product },
+  models: { Product, User },
 } = require('../db');
 module.exports = router;
 
@@ -33,6 +33,23 @@ router.post('/', async (req, res, next) => {
       return res.status(403).send('Admin login required');
     }
     res.status(201).send(await Product.create(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
+
+//DELETING A PRODUCT
+router.delete('/:id', async (req, res, next) => {
+  console.log('==============', req.headers, req.body);
+  try {
+    // console.log(req.headers.authorization);
+    const { admin } = await User.findByToken(req.headers.authorization);
+    if (!admin) {
+      return res.status(403).send('Admin login required');
+    }
+    const shoe = await Product.findByPk(req.params.id);
+    await shoe.destroy();
+    res.send(shoe);
   } catch (error) {
     next(error);
   }
