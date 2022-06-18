@@ -262,41 +262,28 @@ async function seed() {
   }
 
   for (let oId = 0; oId < 21; oId++) {
-    // associating a random user to the order
+    // associating an existing user to an order
     let randomUser =
       findAllUsers[Math.floor(Math.random() * findAllUsers.length)];
-    let userPayMethod = await randomUser.getPayments();
-    const orderdProductsArr = [];
-    // creating random amounts of products being ordered
-    for (
-      let prodArrId = 0;
-      prodArrId < Math.floor(Math.random() * 12) + 1;
-      prodArrId++
-    ) {
-      orderdProductsArr.push(
-        allProducts[Math.floor(Math.random() * allProducts.length)]
-      );
-    }
+    // let userPayMethod = await randomUser.getPayments();
+    // const orderedProductsArr = [];
+    // // creating random amounts of products being ordered
+    // for (
+    //   let prodArrId = 0;
+    //   prodArrId < Math.floor(Math.random() * 12) + 1;
+    //   prodArrId++
+    // ) {
+    //   orderedProductsArr.push(
+    //     allProducts[Math.floor(Math.random() * allProducts.length)]
+    //   );
+    // }
     // console.log(allProducts[0])
-    // console.log(orderdProductsArr)
+    // console.log(orderedProductsArr)
     await Order.create({
-      products: orderdProductsArr,
       shippingAddress: randomUser.address,
-      // shipping date ranomized between 1-1-2022 & 1-1-2023
-      shippingDate: new Date(
-        new Date(2022, 0, 1).getTime() +
-          Math.random() *
-            (new Date(2023, 0, 1).getTime() - new Date(2022, 0, 1).getTime())
-      ),
-      total: orderdProductsArr.reduce(({ price }, total) => {
-        return price + total;
-      }, 0),
       orderStatus: ['Open', 'Closed'][
-        Math.floor(Math.random() * 4)
+        Math.floor(Math.random() * 2)
       ],
-      payMethod: userPayMethod.length
-        ? Math.floor(Math.random() * userPayMethod.length)
-        : fakeCCArr[Math.floor(Math.random() * fakeCCArr.length)].ccNo,
       confirmCode: randomConfirmCode(),
     });
   }
