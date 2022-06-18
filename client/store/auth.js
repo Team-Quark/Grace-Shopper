@@ -25,12 +25,12 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-// console.log(cart)
+    // console.log(cart)
 
-let finalCart = cart? [... res.data.cart, ...cart]: res.data.cart
+    let finalCart = cart ? [...res.data.cart, ...cart] : res.data.cart;
 
-res.data.cart = finalCart
-// window.localStorage.setItem('cart', JSON.stringify(finalCart))
+    res.data.cart = finalCart;
+    // window.localStorage.setItem('cart', JSON.stringify(finalCart))
     return dispatch(setAuth(res.data));
   }
 };
@@ -39,7 +39,8 @@ export const authenticate = (formData, method) => async (dispatch) => {
   try {
     const res = await axios.post(`/auth/${method}`, formData);
     window.localStorage.setItem(TOKEN, res.data.token);
-    localStorage.getItem('token')
+    //localStorage.getItem('token');
+    localStorage.getItem('token');
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
@@ -48,7 +49,7 @@ export const authenticate = (formData, method) => async (dispatch) => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  window.localStorage.clear()
+  window.localStorage.clear();
   history.push('/login');
   return {
     type: SET_AUTH,
