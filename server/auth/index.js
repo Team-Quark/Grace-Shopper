@@ -5,6 +5,7 @@ const {
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
+  console.log('Client Auth Req: ', req.body);
   try {
     res.send({ token: await User.authenticate(req.body) });
   } catch (err) {
@@ -12,6 +13,7 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+// DESTRUCTURE USER CREATE OBJECT TO PREVENT ADMIN FILED ATTACK
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body);
