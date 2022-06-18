@@ -1,5 +1,6 @@
 import axios from 'axios';
 import history from '../history';
+import { logoutCart } from './cart';
 
 const TOKEN = 'token';
 
@@ -18,7 +19,7 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
  */
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-  const cart = JSON.parse(window.localStorage.getItem('cart'));
+  // const cart = JSON.parse(window.localStorage.getItem('cart'));
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
@@ -27,9 +28,9 @@ export const me = () => async (dispatch) => {
     });
     // console.log(cart)
 
-    let finalCart = cart ? [...res.data.cart, ...cart] : res.data.cart;
+    // let finalCart = cart ? [...res.data.cart, ...cart] : res.data.cart;
 
-    res.data.cart = finalCart;
+    // res.data.cart = finalCart;
     // window.localStorage.setItem('cart', JSON.stringify(finalCart))
     return dispatch(setAuth(res.data));
   }
