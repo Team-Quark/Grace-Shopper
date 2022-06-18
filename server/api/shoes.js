@@ -55,4 +55,18 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
+//UPDATING A PRODUCT
+router.put('/:id/update', async (req, res, next) => {
+  try {
+    const { admin } = await User.findByToken(req.headers.authorization);
+    if (!admin) {
+      return res.status(403).send('Admin login required');
+    }
+    const shoe = await Product.findByPk(req.params.id);
+    res.send(await shoe.update(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
