@@ -3,6 +3,7 @@ import axios from 'axios';
 const GET_PRODUCTS = 'GET_PRODUCTS';
 const DELETE_SHOE = 'DELETE_SHOE';
 const UPDATE_SHOE = 'UPDATE_SHOE';
+const ADD_SHOE = 'ADD_SHOE';
 
 const ALL_PRODUCTS = (shoes) => ({
   type: GET_PRODUCTS,
@@ -21,6 +22,12 @@ const updateShoe = (shoe) => {
   };
 };
 
+export const addShoe = (shoe) => ({
+  type: ADD_SHOE,
+  shoe,
+});
+
+//THUNK CREATOR
 export const fetchAllShoes = () => {
   return async (dispatch) => {
     const { data } = await axios.get('/api/shoes');
@@ -28,7 +35,6 @@ export const fetchAllShoes = () => {
   };
 };
 
-//THUNK CREATOR
 export const fetchdeleteShoe = (id, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem('token');
@@ -61,6 +67,22 @@ export const fetchUpdateShoe = (shoe, history) => {
   };
 };
 
+export const fetchAddShoe = (shoe, history) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem('token');
+    let res;
+    if (token) {
+      res = await axios.post(`/api/shoes`, shoe, {
+        headers: {
+          authorization: token,
+        },
+      });
+    }
+    dispatch(addShoe(res.data));
+    history.push('/');
+  };
+};
+
 const initialState = [];
 
 export default (state = initialState, action) => {
@@ -73,7 +95,8 @@ export default (state = initialState, action) => {
       return state.map((shoe) =>
         shoe.id === action.shoe.id ? action.shoe : shoe
       );
-
+    case ADD_SHOE:
+      return [...state, action.shoe];
     default:
       return state;
   }
