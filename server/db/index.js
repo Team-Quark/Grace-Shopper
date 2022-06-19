@@ -9,7 +9,10 @@ const Product = require('./models/Product');
 
 //associations could go here!
 const Product_Order = db.define('Product_Order', {
-  quantity: Sequelize.INTEGER
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
+  }
 });
 
 User.hasMany(Payment)

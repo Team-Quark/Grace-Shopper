@@ -17,18 +17,20 @@ export const logoutCart = () => ({
 export const fetchCart = () => {
     return async(dispatch) => {
         const token = window.localStorage.getItem('token');
-        // const cart = JSON.parse(window.localStorage.getItem('cart'));
+        const cart = JSON.parse(window.localStorage.getItem('cart'));
         if(token){
-            const {data} = await axios.get('/api/cart', {
-                headers: {
-                    authorization: token
-                }
-            });
-            dispatch(CART_ITEMS(data.products))
-            // if(cart){
-            //     data.products.push(...cart)
-            // }
-        } 
+            if(cart){
+                const {data} = await axios.post('/api/cart', {cart, token});
+                dispatch(CART_ITEMS(data.products))
+            } else {
+                const {data} = await axios.get('/api/cart', {
+                    headers: {
+                        authorization: token
+                    }
+                });
+                dispatch(CART_ITEMS(data.products))
+            }
+        }
     }
 }
 

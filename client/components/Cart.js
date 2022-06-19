@@ -6,7 +6,6 @@ import {me} from  '../store';
 const Cart = (props) => {
   const [cart, setCart] = useState([]);
   useEffect(() => {
-    console.log('1st')
     let localCart = JSON.parse(localStorage.getItem('cart'))
     // if(localCart){
     //   setCart(localCart);
@@ -17,7 +16,7 @@ const Cart = (props) => {
     fetchData();
 
     if(localCart !== null){
-      setCart([...localCart, ...props.cart]);
+      setCart([[...localCart, ...props.cart]]);
     } else {
       setCart(props.cart)
     }

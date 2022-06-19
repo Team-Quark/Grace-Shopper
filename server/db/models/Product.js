@@ -23,13 +23,11 @@ const Product = db.define('product', {
   },
 })
 
-Product.findItem = async function(list){
+Product.findItem = async function(item){
   try{
     const data = await Product.findAll({
       where: {
-        id: {
-          [Sequelize.Op.in]: list
-        }
+        id: item.id
       }
     })
     return data;
