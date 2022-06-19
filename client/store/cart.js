@@ -17,20 +17,36 @@ export const logoutCart = () => ({
 export const fetchCart = () => {
     return async(dispatch) => {
         const token = window.localStorage.getItem('token');
-        const cart = JSON.parse(window.localStorage.getItem('cart'));
-        if(token){
-            if(cart){
-                const {data} = await axios.post('/api/cart', {cart, token});
-                dispatch(CART_ITEMS(data.products))
-            } else {
-                const {data} = await axios.get('/api/cart', {
-                    headers: {
-                        authorization: token
-                    }
-                });
-                dispatch(CART_ITEMS(data.products))
-            }
+        const cart = JSON.parse(window.localStorage.getItem('cart')) === null ? [] : JSON.parse(window.localStorage.getItem('cart'));
+        if(token && cart){
+            const {data} = await axios.post('/api/cart', {cart, token});
+            dispatch(CART_ITEMS(data.products))
+            return
+        } 
+        if (token) {
+            const {data} = await axios.get('/api/cart', {
+                headers: {
+                    authorization: token
+                }
+            });
+            dispatch(CART_ITEMS(data.products))
+        } else {
+            dispatch(CART_ITEMS(cart))
         }
+
+        // if(token){
+        //     if(cart){
+        //         const {data} = await axios.post('/api/cart', {cart, token});
+        //         dispatch(CART_ITEMS(data.products))
+        //     } else {
+        //         const {data} = await axios.get('/api/cart', {
+        //             headers: {
+        //                 authorization: token
+        //             }
+        //         });
+        //         dispatch(CART_ITEMS(data.products))
+        //     }
+        // }
     }
 }
 
