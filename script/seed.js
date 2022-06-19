@@ -270,7 +270,7 @@ async function seed() {
     // associating an existing user to an order
     let randomUser =
       findAllUsers[Math.floor(Math.random() * findAllUsers.length)];
-      console.log(randomUser)
+      // console.log(randomUser)
     // let userPayMethod = await randomUser.getPayments();
     // const orderedProductsArr = [];
     // // creating random amounts of products being ordered
@@ -311,7 +311,7 @@ async function seed() {
   }
 
   console.log(`seeded Orders successfully`);
-// Typical Sequel querying 
+// Typical Sequel querying
   // let findCody = await User.findOne({
   //   where: {
   //     id: 1
@@ -341,7 +341,7 @@ async function seed() {
 
   // console.dir(findCody.orders[0].products[0].Product_Order)
   // console.log(findCody[0].products)
-  console.log(JSON.stringify(findCody))
+  // console.log(JSON.stringify(findCody))
 
   // Will return to web scraping - Sheriff
 
