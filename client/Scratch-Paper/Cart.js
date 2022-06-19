@@ -5,46 +5,49 @@ import {me} from  '../store';
 
 const Cart = (props) => {
   const [cart, setCart] = useState([]);
-
   useEffect(() => {
     console.log('1st')
     let localCart = JSON.parse(localStorage.getItem('cart'))
-    let localToken = localStorage.getItem('token')
-
-
+    // if(localCart){
+    //   setCart(localCart);
+    // }
     async function fetchData(){
       await props.fetchCart();
     }
-
-    async function authUser(){
-      await props.authToken();
-    }
-    console.log(props.cart)
-if(!props.cart.length && localToken){
-  console.log('true')
-  authUser();
-  console.log(props.user)
-}
-
     fetchData();
-console.log(props.cart)
+
     if(localCart !== null){
       setCart([...localCart, ...props.cart]);
     } else {
       setCart(props.cart)
-      console.log(props.cart)
     }
-  }, []);
+//   if(!props.user.id && localStorage.getItem('token')){
+//     props.authToken()
+//     }
+//     // console.log(localStorage.getItem('token'))
+//     if ( localStorage.getItem('token')) {
+//       // if (!props.user.id && localStorage.getItem('token')) {
+//       console.log('we here')
+//        console.log(props.cart)
+//        console.log(props.user)
 
-  const changeQuantity = (e) => {
-    e.persist();
-    setCart(prevCart => prevCart.map(item => {
-      if(item.id == e.target.id){
-        item.Product_Order.quantity = e.target.value
-      }
-      return item
-    }))
-  }
+// // console.log( props.authToken())
+
+//       // setCart(props.user.cart);
+//       setCart(props.user.cart);
+//     }
+
+
+//     if(!props.user.id && !localStorage.getItem('token')){
+//       setCart(JSON.parse(localStorage.getItem("cart")));
+//       console.log("in if state");
+//     }
+
+//     if(!cart.length){
+// console.log(cart)
+//       setCart[props.user.cart]
+//     }
+  }, []);
 
   return (
     <div>
@@ -52,15 +55,9 @@ console.log(props.cart)
         return (
           <div key={index}>
             <h1>{item.name}</h1>
-            <h3>${`${item.price} x${props.cart[index].Product_Order.quantity}: total $${item.price * props.cart[index].Product_Order.quantity}`}</h3>
+            <h3>{item.price}</h3>
+            <h5>{item.description}</h5>
             <img src={item.imageUrl} width={500} />
-            <span htmlFor="quantity">Quantity :</span>
-  <input type="number" id={item.id} name="quantity" min="1" max="99" value={item.Product_Order.quantity} onChange={(e) => changeQuantity(e)} />
-  <input type="button" value="Update Cart" />
-  <input type="button" value="X" />
-            {/* <h5>description:</h5>
-            {item.description} */}
-            <hr />
           </div>
         );
       })}

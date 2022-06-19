@@ -5,45 +5,64 @@ import {me} from  '../store';
 
 const Cart = (props) => {
   const [cart, setCart] = useState([]);
+  const [quantity, setQuantity] = useState({});
 
+  const updateQuantityAfterCartFetch = () =>{
+console.log('hey')
+    setQuantity(prevQ => {
+      let newQ = {...prevQ}
+      for(let item = 0;item<cart.length;item++){
+        console.log(cart[item].id)
+        if(!prevQ[cart[item].id]){
+          newQ[cart[item].id] = cart[item].Product_Order.quantity
+        } else if(prevQ[cart[item].id] !== cart[item].Product_Order.quantity){
+          newQ[cart[item].id] = cart[item].Product_Order.quantity
+        } else{
+          continue;
+        }
+        return newQ
+
+      }
+
+    })
+
+
+    console.log(quantity)
+  }
   useEffect(() => {
     console.log('1st')
     let localCart = JSON.parse(localStorage.getItem('cart'))
-    let localToken = localStorage.getItem('token')
-
-
     async function fetchData(){
       await props.fetchCart();
     }
-
-    async function authUser(){
-      await props.authToken();
-    }
-    console.log(props.cart)
-if(!props.cart.length && localToken){
-  console.log('true')
-  authUser();
-  console.log(props.user)
-}
 
     fetchData();
 console.log(props.cart)
     if(localCart !== null){
       setCart([...localCart, ...props.cart]);
+      updateQuantityAfterCartFetch()
     } else {
       setCart(props.cart)
       console.log(props.cart)
+      updateQuantityAfterCartFetch()
     }
   }, []);
 
   const changeQuantity = (e) => {
     e.persist();
-    setCart(prevCart => prevCart.map(item => {
-      if(item.id == e.target.id){
-        item.Product_Order.quantity = e.target.value
-      }
-      return item
-    }))
+    console.log(e)
+    // setQuantity(prevQ =>{
+    //   let index = prevQ.findIndex(el => el.id == e.target.id)
+    //   console.log(index)
+    //   const newCart = prevQ
+    //   newCart[index].Product_Order.quantity = e.target.value;
+    //   return newCart
+
+    // }
+    //   )
+
+    setQuantity({...quantity, [e.target.id]: e.target.value})
+    console.log(quantity)
   }
 
   return (
@@ -52,7 +71,7 @@ console.log(props.cart)
         return (
           <div key={index}>
             <h1>{item.name}</h1>
-            <h3>${`${item.price} x${props.cart[index].Product_Order.quantity}: total $${item.price * props.cart[index].Product_Order.quantity}`}</h3>
+            <h3>${item.price}</h3>
             <img src={item.imageUrl} width={500} />
             <span htmlFor="quantity">Quantity :</span>
   <input type="number" id={item.id} name="quantity" min="1" max="99" value={item.Product_Order.quantity} onChange={(e) => changeQuantity(e)} />

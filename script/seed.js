@@ -15,7 +15,7 @@ async function seed() {
   console.log('db synced!');
 
   // Creating Users
-  const users = await User.create({
+  const cody = await User.create({
     email: 'cody@gmail.com',
     password: '123',
     firstName: 'cody',
@@ -124,7 +124,12 @@ async function seed() {
     },
   ];
   // Getting All the users added to the db
-  let findAllUsers = await User.findAll();
+  let  findAllUsers = await User.findAll({
+    include: {
+      model: Order,
+      include: Product
+    }
+  });
 
   // Creating Payment Options (associates random user to payment)
   for (let pId = 0; pId < fakeCCArr.length; pId++) {
@@ -145,7 +150,7 @@ async function seed() {
   console.log(`seeded Payments successfully`);
 
   // Creating Products
-  await Product.create({
+ const jordans = await Product.create({
     imageUrl:
       'https://images.stockx.com/images/Air-Jordan-4-Retro-Infrared-GS-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=75&fm=avif&auto=compress&dpr=1&trim=color&updated_at=1646935173&q=80',
     name: 'Jordan 4 Retro Infrared',
@@ -154,7 +159,7 @@ async function seed() {
     description: 'Lorem Ipsum',
   });
 
-  await Product.create({
+ const yeezys = await Product.create({
     imageUrl:
       'https://images.stockx.com/images/adidas-yeezy-boost-700-hi-red-red.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=avif&auto=compress&dpr=1&trim=color&updated_at=1655130455&q=80',
     name: 'adidas Yeezy Boost 700 Hi-Res Red',
@@ -265,6 +270,7 @@ async function seed() {
     // associating an existing user to an order
     let randomUser =
       findAllUsers[Math.floor(Math.random() * findAllUsers.length)];
+      console.log(randomUser)
     // let userPayMethod = await randomUser.getPayments();
     // const orderedProductsArr = [];
     // // creating random amounts of products being ordered
@@ -279,16 +285,63 @@ async function seed() {
     // }
     // console.log(allProducts[0])
     // console.log(orderedProductsArr)
-    await Order.create({
-      shippingAddress: randomUser.address,
-      orderStatus: ['Open', 'Closed'][
-        Math.floor(Math.random() * 2)
-      ],
-      confirmCode: randomConfirmCode(),
-    });
+    // the first user cody (Line 18) will have this cart
+    if(oId === 0){
+     const order1 = await Order.create({
+        shippingAddress: cody.address,
+        orderStatus: 'Open',
+        confirmCode: randomConfirmCode(),
+      });
+      order1.addProducts([jordans, yeezys], {
+        through: {
+           quantity: 1
+        }
+      });
+      cody.addOrder(order1)
+
+    }else {
+      await Order.create({
+        shippingAddress: randomUser.address,
+        orderStatus: ['Open', 'Closed'][
+          Math.floor(Math.random() * 2)
+        ],
+        confirmCode: randomConfirmCode(),
+      });
+    }
   }
 
   console.log(`seeded Orders successfully`);
+// Typical Sequel querying 
+  // let findCody = await User.findOne({
+  //   where: {
+  //     id: 1
+  //   },
+  //   include: {
+  //     model: Order,
+  //     include: {
+  //       model: Product,
+  //       through:
+  //        "quantity",
+
+  //     }
+  //   }
+  // });
+// testing out Sequelize mixins ()
+  let findCody = await cody.getOrders({
+    include:{
+      model: Product,
+      attributes: ['price'],
+      // joinTableAttributes: ['quantity']
+      through: {
+        attributes: ['quantity']
+
+      }
+    },
+  } )
+
+  // console.dir(findCody.orders[0].products[0].Product_Order)
+  // console.log(findCody[0].products)
+  console.log(JSON.stringify(findCody))
 
   // Will return to web scraping - Sheriff
 
