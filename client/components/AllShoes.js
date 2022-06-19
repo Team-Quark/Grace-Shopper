@@ -25,6 +25,10 @@ const AllShoes = (props) => {
             <button type="button" onClick={() => props.deleteShoe(shoe.id)}>
               X
             </button>
+            <br />
+            <Link to={`/shoes/${shoe.id}/update`}>
+              <button type="button">Update Shoe</button>
+            </Link>
           </div>
         );
       })}
