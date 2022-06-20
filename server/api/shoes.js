@@ -13,6 +13,19 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/type/:type', async (req, res, next) => {
+  try {
+    const shoes = await Product.findAll({
+      where: {
+        shoeType: req.params.type
+      }
+    });
+    res.json(shoes);
+  } catch (e) {
+    next(e);
+  }
+});
+
 //SingleShoe
 router.get('/:id', async (req, res, next) => {
   try {
