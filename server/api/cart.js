@@ -49,17 +49,14 @@ router.put("/", async (req, res, next) => {
     // req.body expected object output example = { productId: '1', orderId: '1', userId: '1', quantity: '3' }
     const { productId } = req.body;
     const { orderId } = req.body;
-    const { userId } = req.body;
     const { quantity } = req.body;
 
-    const targetShoeInCart = await Product_Order.update(
+    await Product_Order.update(
       { quantity },
       {
         where: { productId, orderId },
       }
     );
-    console.log(targetShoeInCart);
-
     res.send(
       await Order.findOne({
         where: {
@@ -78,15 +75,8 @@ router.put("/", async (req, res, next) => {
 
 router.delete("/:productId/:orderId", async (req, res, next) => {
   try {
-    // req.body expected object output example = { productId: '1', orderId: '1', userId: '1'}
-    console.log(req.body);
-    //    const {productId} = req.body;
-    //    const {orderId} = req.body;
-    //    const {userId} = req.body;
-
     const { productId } = req.params;
     const { orderId } = req.params;
-
     const cart = await Order.findOne({
       where: { id: orderId },
       include: {
@@ -94,15 +84,10 @@ router.delete("/:productId/:orderId", async (req, res, next) => {
         through: "quantity",
       },
     });
-    console.log(cart);
     const targetShoeInCart = await Product.findOne({
       where: { id: productId },
     });
-    console.log(targetShoeInCart);
-
     await cart.removeProduct(targetShoeInCart);
-    // await cart.reload();
-
     res.json(true);
   } catch (e) {
     next(e);

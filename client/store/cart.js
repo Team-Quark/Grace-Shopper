@@ -55,35 +55,29 @@ export const fetchCart = () => {
 };
 
 export const updateCart = (e, history) => {
-  console.log(e.target)
-let obj ={
-            productId: e.target.dataset.id,
-            orderId: e.target.dataset.orderid,
-            userId: e.target.dataset.userid,
-            quantity: e.target.dataset.quantity,
-          }
-          // console.log(obj)
+  console.log(e.target);
+  let obj = {
+    productId: e.target.dataset.id,
+    orderId: e.target.dataset.orderid,
+    userId: e.target.dataset.userid,
+    quantity: e.target.dataset.quantity,
+  };
   return async (dispatch) => {
     const { data } = await axios.put("/api/cart", obj);
     dispatch(UPDATE_CART_(data.products));
-    alert('Cart Updated')
+    alert("Cart Updated");
     history.push(`/cart`);
   };
 };
 
 export const removeShoe = (e, history) => {
   e.persist();
-  // let obj ={
-  //   productId: e.target.dataset.id,
-  //   orderId: e.target.dataset.orderid,
-  //   userId: e.target.dataset.userid,
-  // }
   return async (dispatch) => {
-    // console.log(obj);
-    const { data: deleted } = await axios.delete(`/api/cart/${e.target.dataset.id}/${e.target.dataset.orderid}`);
-    console.log(deleted);
-    if(deleted){
-      console.log('deleted')
+    const { data: deleted } = await axios.delete(
+      `/api/cart/${e.target.dataset.id}/${e.target.dataset.orderid}`
+    );
+    if (deleted) {
+      console.log("deleted");
       dispatch(REMOVE_SHOE_(e.target.dataset.id));
       history.push(`/cart`);
     }
@@ -102,12 +96,11 @@ export default (state = initialState, action) => {
           item.Product_Order.quantity = action.e.target.value;
         }
         return item;
-      })
-      // action.cart;
+      });
     case UPDATE_CART:
       return action.cart;
     case REMOVE_SHOE:
-      return [...state.filter(shoe => shoe.id != action.shoeId)]
+      return [...state.filter((shoe) => shoe.id != action.shoeId)];
     case CLEAR_CART:
       return [];
     default:
