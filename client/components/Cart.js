@@ -32,7 +32,17 @@ const Cart = (props) => {
   return (
     <div>
       {console.log(props.user, props.cart)}
-      {cart.map((item, index) => {
+      {!cart.length ? (
+          <p>
+            Your Cart is currently empty, You can add Shoes to your cart by going to{' '}
+            <span
+              className="look-like-link"
+              onClick={() => props.history.push('/shoes')}
+            >
+             Shoes
+            </span>
+          </p>
+        )  : cart.map((item, index) => {
         return (
           <div key={index}>
             <h1>{item.name}</h1>
