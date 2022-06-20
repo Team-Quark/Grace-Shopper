@@ -270,21 +270,7 @@ async function seed() {
     // associating an existing user to an order
     let randomUser =
       findAllUsers[Math.floor(Math.random() * findAllUsers.length)];
-      // console.log(randomUser)
-    // let userPayMethod = await randomUser.getPayments();
-    // const orderedProductsArr = [];
-    // // creating random amounts of products being ordered
-    // for (
-    //   let prodArrId = 0;
-    //   prodArrId < Math.floor(Math.random() * 12) + 1;
-    //   prodArrId++
-    // ) {
-    //   orderedProductsArr.push(
-    //     allProducts[Math.floor(Math.random() * allProducts.length)]
-    //   );
-    // }
-    // console.log(allProducts[0])
-    // console.log(orderedProductsArr)
+      
     // the first user cody (Line 18) will have this cart
     if(oId === 0){
      const order1 = await Order.create({
@@ -338,10 +324,6 @@ async function seed() {
       }
     },
   } )
-
-  // console.dir(findCody.orders[0].products[0].Product_Order)
-  // console.log(findCody[0].products)
-  // console.log(JSON.stringify(findCody))
 
   // Will return to web scraping - Sheriff
 
