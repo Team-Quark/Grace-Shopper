@@ -27,9 +27,9 @@ export const me = () => async (dispatch) => {
     });
     // console.log(cart)
 
-    let finalCart = cart ? [...res.data.cart, ...cart] : res.data.cart;
+    // let finalCart = cart ? [...res.data.cart, ...cart] : res.data.cart;
 
-    res.data.cart = finalCart;
+    // res.data.cart = finalCart;
     // window.localStorage.setItem('cart', JSON.stringify(finalCart))
     return dispatch(setAuth(res.data));
   }

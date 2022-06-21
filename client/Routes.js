@@ -6,8 +6,12 @@ import Home from './components/Home';
 import AllShoes from './components/AllShoes';
 import { me } from './store';
 import SingleShoe from './components/singleShoe';
+import SingleUser from './components/singleUser';
 import Cart from './components/Cart';
 import Admin from './components/Admin';
+import UpdateShoe from './components/UpdateShoe';
+import AddShoe from './components/AddShoe';
+import UpdateUser from './components/UpdateUser';
 
 /**
  * COMPONENT
@@ -27,7 +31,11 @@ class Routes extends Component {
             <Route exact path="/shoes" component={AllShoes} />
             <Route exact path="/shoes/:id" component={SingleShoe} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/users" component={Admin} />
+            <Route exact path="/shoes/:id/update" component={UpdateShoe} />
+            <Route exact path="/createshoe" component={AddShoe} />
+            <Route exact path="/users/:id" component={SingleUser} />
+            <Route exact path="/users/:id/profile" component={UpdateUser} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -37,7 +45,7 @@ class Routes extends Component {
             <Route exact path="/shoes" component={AllShoes} />
             <Route path="/login" component={Login} />
             <Route exact path="/cart" component={Cart} />
-            
+
             <Route path="/signup" component={Signup} />
           </Switch>
         )}

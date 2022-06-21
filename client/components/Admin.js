@@ -22,10 +22,22 @@ const allUsers = (props) => {
             return (
               <div key={user.id}>
                 <div>{`Id: ${user.id}   Email: ${user.email}`}</div>
+                <Link to={`/users/${user.id}/profile`}>
+                  <button type="button">Update User</button>
+                </Link>
               </div>
             );
           })
-        : 'test'}
+        : props.users.map((user) => {
+            return (
+              <div key={user.id}>
+                <div>{`Id: ${user.id}   Email: ${user.email}`}</div>
+                <Link to={`/users/${user.id}/profile`}>
+                  <button type="button">Update User</button>
+                </Link>
+              </div>
+            );
+          })}
     </div>
   );
 };
