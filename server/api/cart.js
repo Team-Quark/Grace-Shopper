@@ -35,8 +35,9 @@ router.post("/", async (req, res, next) => {
         return Product.findItem(item);
       })
     );
-
-    cart[0].addProduct(items[0]);
+    items.map(item => {
+      cart[0].addProduct(item)
+    })
 
     res.send(cart[0]);
   } catch (e) {

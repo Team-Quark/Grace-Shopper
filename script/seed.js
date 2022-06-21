@@ -411,29 +411,29 @@ async function seed() {
   //     });
   //   }
   // }
-  // for(let oId = 1; oId < 10; oId++){
-  //   if(oId === 1){
-  //     const order1 = await Order.create({
-  //        shippingAddress: cody.address,
-  //        orderStatus: 'Open',
-  //        confirmCode: randomConfirmCode(),
-  //      });
-  //      order1.addProducts([jordans, yeezys], {
-  //        through: {
-  //           quantity: 1
-  //        }
-  //      });
-  //      cody.addOrder(order1)
-  //   } else {
-  //     const user = findAllUsers[oId]
-  //     const order = await Order.create({
-  //       shippingAddress: user.address,
-  //       confirmCode: randomConfirmCode()
-  //     });
+  for(let oId = 1; oId < 10; oId++){
+    if(oId === 1){
+      const order1 = await Order.create({
+         shippingAddress: cody.address,
+         orderStatus: 'Open',
+         confirmCode: randomConfirmCode(),
+       });
+       order1.addProducts([jordans, yeezys], {
+         through: {
+            quantity: 1
+         }
+       });
+       cody.addOrder(order1)
+    } else {
+      const user = findAllUsers[oId]
+      const order = await Order.create({
+        shippingAddress: user.address,
+        confirmCode: randomConfirmCode()
+      });
 
-  //     user.addOrder(order);
-  //   }
-  // }
+      user.addOrder(order);
+    }
+  }
 
   console.log(`seeded Orders successfully`);
 // Typical Sequel querying
