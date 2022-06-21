@@ -17,6 +17,7 @@ const Cart = (props) => {
   });
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(fetchCart());
     console.log(cart);

@@ -1,43 +1,52 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchAllShoes } from '../store/allshoes';
 import { Link } from 'react-router-dom';
+import { fetchdeleteShoe } from '../store/allshoes';
 
 const AllShoes = (props) => {
+  const [shoes, setShoes] = useState([]);
 
-    const [shoes, setShoes] = useState([])
+  useEffect(() => {
+    props.fetchAllShoes();
+  }, shoes);
 
-    useEffect(() => {
-        props.fetchAllShoes();
-    }, shoes)
-
-    return (
-        <div>
-            {props.shoes.map(shoe => {
-                return (
-                    <div key={shoe.id}>
-                        <Link to={`/shoes/${shoe.id}`} >
-                            <h1>{shoe.name}</h1>
-                            <h3>$${shoe.price}</h3>
-                            <h5>{shoe.description}</h5>
-                            <img src={shoe.imageUrl} width={400}/>    
-                        </ Link> 
-                    </div>
-                )
-            })}
-        </div>
-    )
-}
+  return (
+    <div>
+      {props.shoes.map((shoe) => {
+        return (
+          <div key={shoe.id}>
+            <Link to={`/shoes/${shoe.id}`}>
+              <h1>{shoe.name}</h1>
+              <h3>$${shoe.price}</h3>
+              <h5>{shoe.description}</h5>
+              <img src={shoe.imageUrl} />
+            </Link>
+            <button type="button" onClick={() => props.deleteShoe(shoe.id)}>
+              X
+            </button>
+            <br />
+            <Link to={`/shoes/${shoe.id}/update`}>
+              <button type="button">Update Shoe</button>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 const mapState = (state) => {
-    return {
-        shoes: state.allshoes
-    }
-}
+  return {
+    shoes: state.allshoes,
+  };
+};
 
-const mapDispatch = (dispatch) => {
-    return {
-        fetchAllShoes: () => dispatch(fetchAllShoes())
-}}
+const mapDispatch = (dispatch, history) => {
+  return {
+    fetchAllShoes: () => dispatch(fetchAllShoes()),
+    deleteShoe: (id) => dispatch(fetchdeleteShoe(id, history)),
+  };
+};
 
-export default connect(mapState,mapDispatch)(AllShoes)
+export default connect(mapState, mapDispatch)(AllShoes);

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const GET_USERS = 'GET_USERS';
 
+
 const ALL_USERS = (users) => ({
   type: GET_USERS,
   users,
@@ -14,6 +15,7 @@ export const fetchAllUsers = () => async (dispatch) => {
     res = await axios.get('/api/users', {
       headers: {
         authorization: token,
+        
       },
     });
   }
