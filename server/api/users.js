@@ -41,3 +41,21 @@ router.post('/cart', async (req, res, next) => {
     next(e);
   }
 });
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const singleUser = await User.findByPk(req.params.id);
+    res.send(singleUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:id/profile', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.send(await user.update(req.body));
+  } catch (e) {
+    next(e);
+  }
+});

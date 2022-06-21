@@ -15,6 +15,7 @@ export const fetchAllUsers = () => async (dispatch) => {
     res = await axios.get('/api/users', {
       headers: {
         authorization: token,
+        
       },
     });
   }

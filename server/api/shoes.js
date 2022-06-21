@@ -13,16 +13,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-//SingleShoe
-router.get('/:id', async (req, res, next) => {
-  try {
-    const singleShoe = await Product.findByPk(req.params.id);
-    res.send(singleShoe);
-  } catch (err) {
-    next(err);
-  }
-});
-
 //ADDING A PRODUCT
 router.post('/', async (req, res, next) => {
   try {
@@ -34,6 +24,15 @@ router.post('/', async (req, res, next) => {
     res.status(201).send(await Product.create(req.body));
   } catch (error) {
     next(error);
+  }
+});
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const singleShoe = await Product.findByPk(req.params.id);
+    res.send(singleShoe);
+  } catch (err) {
+    next(err);
   }
 });
 

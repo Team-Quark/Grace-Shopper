@@ -7,6 +7,7 @@ import allshoes from './allshoes';
 import singleShoeReducer from './singleShoe';
 import cart from './cart';
 import admin from './admin';
+import singleUserReducer from './singleUser';
 
 const reducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   singleShoeReducer,
   cart,
   admin,
+  singleUserReducer,
 });
 
 const middleware = composeWithDevTools(
