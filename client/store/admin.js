@@ -22,16 +22,12 @@ export const fetchAllUsers = () => async () => {
   return res.data;
 };
 
-const initialState = {
-  users: [],
-  products: [],
-};
+const initialState = [];
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS:
-      console.log('STATE STATE STATE ACTION.USERS ', action);
-      return { ...state, users: action.users };
+      return action.users;
     default:
       return state;
   }
