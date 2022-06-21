@@ -17,10 +17,19 @@ class SingleShoe extends React.Component {
 
   addShoe() {
     if(localStorage.getItem('cart') === null){
-        localStorage.setItem('cart', JSON.stringify([this.props.singleShoe]))
+        localStorage.setItem('cart', JSON.stringify([{...this.props.singleShoe, Product_Order:{quantity: 1}}]))
       } else{
+        console.log(this.props.singleShoe)
           let updatingCart = JSON.parse(localStorage.getItem('cart'))
-          updatingCart.push(this.props.singleShoe);
+          for(let i = 0; i< updatingCart.length; i++){
+            if(updatingCart[i].id == this.props.singleShoe.id){
+              updatingCart[i].Product_Order.quantity = updatingCart[i].Product_Order.quantity + 1
+              break;
+            }
+            if(i === updatingCart.length -1 ){
+              updatingCart.push({...this.props.singleShoe, Product_Order:{quantity: 0}});
+            }
+          }
       localStorage.setItem('cart',
         JSON.stringify(updatingCart)
        )

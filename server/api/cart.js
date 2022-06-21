@@ -39,6 +39,8 @@ router.post("/", async (req, res, next) => {
     cart[0].addProduct(items[0]);
 
     res.send(cart[0]);
+
+
   } catch (e) {
     next(e);
   }

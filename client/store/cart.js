@@ -50,7 +50,12 @@ export const fetchCart = () => {
         });
         dispatch(FETCH_CART(data.products));
       }
+    } else{
+      if(cart){
+        dispatch(FETCH_CART(cart));
+      }
     }
+
   };
 };
 
