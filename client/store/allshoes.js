@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+// Action Types
 const GET_PRODUCTS = 'GET_PRODUCTS';
 const DELETE_SHOE = 'DELETE_SHOE';
 const UPDATE_SHOE = 'UPDATE_SHOE';
 const ADD_SHOE = 'ADD_SHOE';
 
+// Action Creators
 const ALL_PRODUCTS = (shoes) => ({
   type: GET_PRODUCTS,
   shoes,
@@ -83,8 +85,16 @@ export const fetchAddShoe = (shoe, history) => {
   };
 };
 
-const initialState = [];
+export const fetchShoeType = (type, history) => {
+    return async (dispatch) => {
+        const {data: shoes} = await axios.get(`/api/shoes/type/${type}`);
+        dispatch(ALL_PRODUCTS(shoes));
+        history.push('/shoes')
+    }
+}
 
+const initialState = [];
+// Reducer
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:

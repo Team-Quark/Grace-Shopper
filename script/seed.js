@@ -246,6 +246,7 @@ async function seed() {
       price: 200,
       availableSize: Math.floor(Math.random() * 8) + 7,
       description: 'Lorem Ipsum',
+      shoeType: ['running', 'basketball'][Math.floor(Math.random() * 2)]
     });
   }
 
@@ -270,7 +271,7 @@ async function seed() {
     // associating an existing user to an order
     let randomUser =
       findAllUsers[Math.floor(Math.random() * findAllUsers.length)];
-      
+
     // the first user cody (Line 18) will have this cart
     if(oId === 0){
      const order1 = await Order.create({
