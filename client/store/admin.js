@@ -22,7 +22,7 @@ export const fetchAllUsers = () => async () => {
   return res.data;
 };
 
-const initialState = [];
+const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {

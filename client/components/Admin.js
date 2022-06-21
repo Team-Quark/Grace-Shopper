@@ -52,6 +52,8 @@ const allUsers = () => {
     }
   };
 
+  // updateShoeHandler = (updateShoe) => shoes
+
   return (
     <div>
       {console.log('USERS IN RETURN: ', users)}
@@ -62,6 +64,9 @@ const allUsers = () => {
             return (
               <div key={user.id}>
                 <div>{`Id: ${user.id}   Email: ${user.email}`}</div>
+                <Link to={`/users/${user.id}/profile`}>
+                  <button type="button">Update User</button>
+                </Link>
               </div>
             );
           })
@@ -73,7 +78,7 @@ const allUsers = () => {
       {showAddShoe ? (
         <div>
           <div>-----</div>
-          <AddShoeForm shoeData={{ name: 'test' }} /> <div>-----</div>
+          <AddShoeForm shoeData={{}} /> <div>-----</div>
         </div>
       ) : (
         ''
