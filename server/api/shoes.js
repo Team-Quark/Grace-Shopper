@@ -27,11 +27,11 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     console.log('THIS IS REQ.BODY', req.body);
-    const { admin } = await User.findByToken(req.headers.authorization);
+    const { admin } = await User.findByToken(req.body.authorization);
     if (!admin) {
       return res.status(403).send('Admin login required');
     }
-    res.status(201).send(await Product.create(req.body));
+    res.status(201).send(await Product.create(req.body.newShoe));
   } catch (error) {
     next(error);
   }
