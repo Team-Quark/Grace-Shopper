@@ -21,6 +21,11 @@ const Product = db.define('product', {
     type: Sequelize.FLOAT,
     allowNull: false
   },
+  shoeType: {
+    type: Sequelize.ENUM,
+    values: ['running', 'basketball'],
+    defaultValue: 'basketball',
+  }
 })
 
 Product.findItem = async function(item){
