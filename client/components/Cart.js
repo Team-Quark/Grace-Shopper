@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { Link } from "react-router-dom";
 import {
   fetchCart,
   changeShoeQuantity,
@@ -104,6 +105,9 @@ const Cart = (props) => {
           </div>
         );
       })}
+      <Link to="/checkout">
+        <button>Checkout Cart</button>
+      </Link>
     </div>
   );
 };

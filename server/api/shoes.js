@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Product },
+  models: { Product, User },
 } = require('../db');
 module.exports = router;
 
@@ -27,6 +27,20 @@ router.get('/type/:type', async (req, res, next) => {
 });
 
 //SingleShoe
+//ADDING A PRODUCT
+router.post('/', async (req, res, next) => {
+  try {
+    console.log('THIS IS REQ.BODY', req.body);
+    const { admin } = await User.findByToken(req.body.authorization);
+    if (!admin) {
+      return res.status(403).send('Admin login required');
+    }
+    res.status(201).send(await Product.create(req.body.newShoe));
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
     const singleShoe = await Product.findByPk(req.params.id);
@@ -36,16 +50,31 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-//ADDING A PRODUCT
-router.post('/', async (req, res, next) => {
-  // console.log('==============', req.headers, req.body);
+//DELETING A PRODUCT
+router.delete('/:id', async (req, res, next) => {
   try {
     // console.log(req.headers.authorization);
     const { admin } = await User.findByToken(req.headers.authorization);
     if (!admin) {
       return res.status(403).send('Admin login required');
     }
-    res.status(201).send(await Product.create(req.body));
+    const shoe = await Product.findByPk(req.params.id);
+    await shoe.destroy();
+    res.send(shoe);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//UPDATING A PRODUCT
+router.put('/:id/update', async (req, res, next) => {
+  try {
+    const { admin } = await User.findByToken(req.headers.authorization);
+    if (!admin) {
+      return res.status(403).send('Admin login required');
+    }
+    const shoe = await Product.findByPk(req.params.id);
+    res.send(await shoe.update(req.body));
   } catch (error) {
     next(error);
   }
