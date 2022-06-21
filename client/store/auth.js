@@ -27,6 +27,16 @@ export const me = () => async (dispatch) => {
       },
     });
     // console.log(cart)
+    console.log(res.data)
+//     let user = res.data
+//     let localCart = window.localStorage.getItem('cart')
+//     let sendingCart
+// if(!localCart){
+//   sendingCart = res.data
+// }
+
+
+        // window.localStorage.setItem('cart', JSON.stringify(finalCart))
 
     // let finalCart = cart ? [...res.data.cart, ...cart] : res.data.cart;
 

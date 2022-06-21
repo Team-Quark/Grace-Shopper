@@ -2,6 +2,13 @@ body {
   font-family: sans-serif;
 }
 
+/* helps indicate that certain tag elements are clickable */
+.look-like-link {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+
 a {
   text-decoration: none;
 }
