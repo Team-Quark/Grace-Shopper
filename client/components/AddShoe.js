@@ -19,7 +19,13 @@ export class AddShoe extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    const header = {
+      headers: {
+        authorization: window.localStorage.getItem('token'),
+      },
+    };
     await axios.post('/api/shoes', {
+      header,
       name: this.state.name,
       imageUrl: this.state.imageUrl,
       description: this.state.description,
