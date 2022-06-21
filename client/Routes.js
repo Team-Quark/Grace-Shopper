@@ -13,6 +13,7 @@ import { Checkout } from './components/Checkout';
 import UpdateShoe from './components/UpdateShoe';
 import AddShoe from './components/AddShoe';
 import UpdateUser from './components/UpdateUser';
+import UserOrders from './components/Orders';
 
 /**
  * COMPONENT
@@ -38,6 +39,7 @@ class Routes extends Component {
             <Route exact path="/createshoe" component={AddShoe} />
             <Route exact path="/users/:id" component={SingleUser} />
             <Route exact path="/users/:id/profile" component={UpdateUser} />
+            <Route exact path="/orders" component={UserOrders} />
             <Redirect to="/home" />
           </Switch>
         ) : (

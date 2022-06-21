@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User, Product },
+  models: { User, Product, Order },
 } = require('../db');
 //const { requireToken } = require('./gateKeeping');
 module.exports = router;
@@ -37,6 +37,22 @@ router.post('/cart', async (req, res, next) => {
   try {
     const products = await Product.findItem(req.body.list);
     res.json(products);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.get('/orders', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    const userOrders = await Order.findAll({
+      where: {
+        userId: user.id,
+        orderStatus: 'Closed',
+      },
+      include: [Product],
+    });
+    res.json(userOrders);
   } catch (e) {
     next(e);
   }
