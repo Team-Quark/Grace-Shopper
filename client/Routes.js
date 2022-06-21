@@ -9,6 +9,7 @@ import SingleShoe from './components/singleShoe';
 import SingleUser from './components/singleUser';
 import Cart from './components/Cart';
 import Admin from './components/Admin';
+import { Checkout } from './components/Checkout';
 import UpdateShoe from './components/UpdateShoe';
 import AddShoe from './components/AddShoe';
 import UpdateUser from './components/UpdateUser';
@@ -31,6 +32,7 @@ class Routes extends Component {
             <Route exact path="/shoes" component={AllShoes} />
             <Route exact path="/shoes/:id" component={SingleShoe} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/users" component={Admin} />
             <Route exact path="/shoes/:id/update" component={UpdateShoe} />
             <Route exact path="/createshoe" component={AddShoe} />
@@ -45,7 +47,7 @@ class Routes extends Component {
             <Route exact path="/shoes" component={AllShoes} />
             <Route path="/login" component={Login} />
             <Route exact path="/cart" component={Cart} />
-
+            <Route exact path="/checkout" component={Checkout} />
             <Route path="/signup" component={Signup} />
           </Switch>
         )}

@@ -84,6 +84,20 @@ export const removeShoe = (e, history) => {
   };
 };
 
+export const completeOrder = () => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const cart = window.localStorage.getItem("cart");
+    if(token){
+      const {data} = await axios.get('/api/checkout', {
+        headers: {
+          authorization: token
+        }
+      });
+    }
+  }
+}
+
 const initialState = [];
 
 export default (state = initialState, action) => {
