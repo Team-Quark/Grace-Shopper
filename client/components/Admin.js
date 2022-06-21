@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 //INCORPORATE RETURN ADMIN STATUS ON LOGIN, TEST TO DISPLAY ADMIN TAB ON NAVBAR
 
 const allUsers = (props) => {
-  console.log('=======PROPS=======> ', props);
+  // console.log('=======PROPS=======> ', props);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

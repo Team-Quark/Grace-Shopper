@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User },
+  models: { User, Product },
 } = require('../db');
 module.exports = router;
 
@@ -29,6 +29,21 @@ router.post('/signup', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   try {
+    let user = await User.findByToken(req.headers.authorization)
+
+    const cart = await user.getOrders({
+      where:{
+        orderStatus: "Open"
+      },
+      include:{
+        model: Product,
+        through: {
+          attributes: ['quantity']
+        }
+      },
+    } )
+// user.cart = cart[0].products
+    // res.send({...user, cart: cart[0].products})
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);

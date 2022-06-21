@@ -6,7 +6,7 @@ const {
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
-  console.log('header: ============> ', req);
+  // console.log('header: ============> ', req);
   try {
     const { admin } = await User.findByToken(req.headers.authorization);
     if (!admin) {

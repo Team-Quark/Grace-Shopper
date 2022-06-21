@@ -12,7 +12,7 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/b7d9211c-26e7-431a-ac24-b0540fb3c00f/air-force-1-07-mens-shoes-5QFp5Z.png'
+    defaultValue: 'https://cdn.flightclub.com/750/TEMPLATE/251353/1.jpg'
   },
   description: {
     type: Sequelize.TEXT
@@ -23,13 +23,11 @@ const Product = db.define('product', {
   },
 })
 
-Product.findItem = async function(list){
+Product.findItem = async function(item){
   try{
     const data = await Product.findAll({
       where: {
-        id: {
-          [Sequelize.Op.in]: list
-        }
+        id: item.id
       }
     })
     return data;
