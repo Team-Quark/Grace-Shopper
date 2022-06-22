@@ -27,6 +27,15 @@ router.get('/type/:type', async (req, res, next) => {
 });
 
 //SingleShoe
+router.get('/:id', async (req, res, next) => {
+  try {
+    const singleShoe = await Product.findByPk(req.params.id);
+    res.send(singleShoe);
+  } catch (err) {
+    next(err);
+  }
+});
+
 //ADDING A PRODUCT
 router.post('/', async (req, res, next) => {
   try {
@@ -40,16 +49,6 @@ router.post('/', async (req, res, next) => {
     next(error);
   }
 });
-
-router.get('/:id', async (req, res, next) => {
-  try {
-    const singleShoe = await Product.findByPk(req.params.id);
-    res.send(singleShoe);
-  } catch (err) {
-    next(err);
-  }
-});
-
 //DELETING A PRODUCT
 router.delete('/:id', async (req, res, next) => {
   try {

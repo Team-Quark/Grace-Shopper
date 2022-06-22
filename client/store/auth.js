@@ -45,6 +45,7 @@ export const authenticate = (formData, method) => async (dispatch) => {
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
   window.localStorage.clear();
+  logoutCart()
   history.push('/login');
   return {
     type: SET_AUTH,

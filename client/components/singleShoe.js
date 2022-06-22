@@ -6,21 +6,28 @@ import { fetchSingleShoe } from '../store/singleShoe';
 class SingleShoe extends React.Component {
   constructor() {
     super();
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.addShoe = this.addShoe.bind(this);
 
   }
   componentDidMount() {
     this.props.fetchSingleShoe(this.props.match.params.id);
-    console.log(this.props);
   }
 
   addShoe() {
+    const shoeId = this.props.singleShoe.id
     if(localStorage.getItem('cart') === null){
-        localStorage.setItem('cart', JSON.stringify([this.props.singleShoe]))
+        localStorage.setItem('cart', JSON.stringify(
+         {dictionary: {[shoeId]: 0}, shoes: [{...this.props.singleShoe, Product_Order:{quantity: 1}}]}
+         ))
       } else{
+        console.log(this.props.singleShoe)
           let updatingCart = JSON.parse(localStorage.getItem('cart'))
-          updatingCart.push(this.props.singleShoe);
+          if(updatingCart.dictionary[shoeId] === undefined){
+            updatingCart.dictionary[shoeId] = updatingCart.shoes.length;
+            updatingCart.shoes.push({...this.props.singleShoe, Product_Order:{quantity: 1}})
+          } else{
+            updatingCart.shoes[updatingCart.dictionary[shoeId]].Product_Order.quantity = updatingCart.shoes[updatingCart.dictionary[shoeId]].Product_Order.quantity + 1
+          }
       localStorage.setItem('cart',
         JSON.stringify(updatingCart)
        )
@@ -28,7 +35,6 @@ class SingleShoe extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div key={this.props.singleShoe.id}>
         <center>
