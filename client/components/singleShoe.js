@@ -8,7 +8,6 @@ class SingleShoe extends React.Component {
     super();
     // this.handleSubmit = this.handleSubmit.bind(this);
     this.addShoe = this.addShoe.bind(this);
-
   }
   componentDidMount() {
     this.props.fetchSingleShoe(this.props.match.params.id);
@@ -16,15 +15,13 @@ class SingleShoe extends React.Component {
   }
 
   addShoe() {
-    if(localStorage.getItem('cart') === null){
-        localStorage.setItem('cart', JSON.stringify([this.props.singleShoe]))
-      } else{
-          let updatingCart = JSON.parse(localStorage.getItem('cart'))
-          updatingCart.push(this.props.singleShoe);
-      localStorage.setItem('cart',
-        JSON.stringify(updatingCart)
-       )
-          }
+    if (localStorage.getItem('cart') === null) {
+      localStorage.setItem('cart', JSON.stringify([this.props.singleShoe]));
+    } else {
+      let updatingCart = JSON.parse(localStorage.getItem('cart'));
+      updatingCart.push(this.props.singleShoe);
+      localStorage.setItem('cart', JSON.stringify(updatingCart));
+    }
   }
 
   render() {
@@ -36,7 +33,7 @@ class SingleShoe extends React.Component {
           <img src={this.props.singleShoe.imageUrl} />
           <p>description: {this.props.singleShoe.description}</p>
           <p>Price: {this.props.singleShoe.price}</p>
-          <p>Available Size: {this.props.singleShoe.availableSize}</p>
+
           <br />
           <br />
 
