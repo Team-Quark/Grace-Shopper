@@ -26,21 +26,6 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    // console.log(cart)
-    console.log(res.data);
-    //     let user = res.data
-    //     let localCart = window.localStorage.getItem('cart')
-    //     let sendingCart
-    // if(!localCart){
-    //   sendingCart = res.data
-    // }
-
-    // window.localStorage.setItem('cart', JSON.stringify(finalCart))
-
-    // let finalCart = cart ? [...res.data.cart, ...cart] : res.data.cart;
-
-    // res.data.cart = finalCart;
-    // window.localStorage.setItem('cart', JSON.stringify(finalCart))
     return dispatch(setAuth(res.data));
   }
 };

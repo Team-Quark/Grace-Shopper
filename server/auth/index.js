@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const {
-  models: { User, Product },
+  models: { User, Product, Order},
 } = require('../db');
-const Order = require('../db/models/Order');
+// const Order = require('../db/models/Order');
 module.exports = router;
+
 
 router.post('/login', async (req, res, next) => {
   console.log('Client Auth Req: ', req.body);
@@ -21,6 +22,11 @@ router.post('/signup', async (req, res, next) => {
 
     user.addOrder(await Order.create({shippingAddress: user.address}))
 
+    // const order = await Order.create({
+    //   shippingAddress: user.address,
+    //   confirmCode: randomConfirmCode()
+    // })
+    // order.setUser(user)
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
@@ -53,3 +59,14 @@ router.get('/me', async (req, res, next) => {
     next(ex);
   }
 });
+
+function randomConfirmCode() {
+  let result = '';
+  let characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let charactersLength = characters.length;
+  for (let i = 0; i < 10; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
