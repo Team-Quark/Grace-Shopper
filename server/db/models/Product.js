@@ -42,4 +42,18 @@ Product.findItem = async function(item){
   }
 }
 
+Product.addItem = async function(item){
+  try{
+    const data = await Product.findAll({
+      where: {
+        id: item.id
+      }
+    })
+    return data;
+  } catch(e){
+    const error = Error('bad list')
+    throw error;
+  }
+}
+
 module.exports = Product

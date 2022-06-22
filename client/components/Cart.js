@@ -19,7 +19,7 @@ const Cart = (props) => {
 
 
   useEffect(() => {
-    dispatch(fetchCart());
+    dispatch(fetchCart(cart));
     console.log(cart);
   }, []);
 
@@ -32,7 +32,7 @@ const Cart = (props) => {
 
   return (
     <div>
-      {console.log(props.user, cart)}
+      {console.log( cart)}
       {!cart.length ? (
           <p>
             Your Cart is currently empty, You can add Shoes to your cart by going to{' '}

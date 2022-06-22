@@ -12,7 +12,6 @@ class SingleShoe extends React.Component {
   }
   componentDidMount() {
     this.props.fetchSingleShoe(this.props.match.params.id);
-    console.log(this.props);
   }
 
   addShoe() {
@@ -26,14 +25,9 @@ class SingleShoe extends React.Component {
           let updatingCart = JSON.parse(localStorage.getItem('cart'))
           if(updatingCart.dictionary[shoeId] === undefined){
             updatingCart.dictionary[shoeId] = updatingCart.shoes.length;
-            updatingCart.shoes.push({...this.props.singleShoe, Product_Order:{quantity: 0}})
+            updatingCart.shoes.push({...this.props.singleShoe, Product_Order:{quantity: 1}})
           } else{
             updatingCart.shoes[updatingCart.dictionary[shoeId]].Product_Order.quantity = updatingCart.shoes[updatingCart.dictionary[shoeId]].Product_Order.quantity + 1
-
-
-
-
-
           }
           // for(let i = 0; i< updatingCart.length; i++){
           //   if(updatingCart[i].id == this.props.singleShoe.id){
@@ -51,7 +45,6 @@ class SingleShoe extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div key={this.props.singleShoe.id}>
         <center>
