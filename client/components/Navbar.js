@@ -6,7 +6,9 @@ import { logout } from '../store';
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
     <h1>
-      <Link to="/home">TEAM-QUARK</Link>
+      <Link to="/home">
+        <img src='logo.png' width={300}/>
+      </Link>
     </h1>
     <nav>
       {isLoggedIn ? (
