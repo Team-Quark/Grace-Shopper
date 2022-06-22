@@ -38,6 +38,8 @@ class Routes extends Component {
             <Route exact path="/createshoe" component={AddShoe} />
             <Route exact path="/users/:id" component={SingleUser} />
             <Route exact path="/users/:id/profile" component={UpdateUser} />
+            <Route exact path="/users/settings" component={UpdateUser} />
+
             <Redirect to="/home" />
           </Switch>
         ) : (
