@@ -14,7 +14,7 @@ const FETCH_CART = (cart) => ({
 });
 
 const CLEAR_CART_ = () => ({
-      type: CLEAR_CART,
+  type: CLEAR_CART,
 });
 
 const UPDATE_CART_ = (cart) => ({
@@ -35,20 +35,13 @@ const REMOVE_SHOE_ = (shoeId) => ({
 
 // Thunks
 export const fetchCart = (cartState) => {
-
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
     const cart = JSON.parse(window.localStorage.getItem("cart"));
 
     if (token) {
-
       if (cart) {
-        // console.log('theres a cart', cart)
         const { data } = await axios.post("/api/cart", { cart, token });
-        // let localCartDic = {}
-        // data.products.map((shoe, index) => localCartDic[shoe.id] = index)
-        // data.shoes.map((shoe, index) => localCartDic[shoe.id] = index)
-        // dispatch(FETCH_CART(data.products));
         dispatch(FETCH_CART(data.shoes));
         localStorage.setItem("cart", JSON.stringify(data));
       } else {
@@ -64,7 +57,7 @@ export const fetchCart = (cartState) => {
     } else {
       if (cart) {
         dispatch(FETCH_CART(cart.shoes));
-      } else{
+      } else {
         dispatch(FETCH_CART([]));
       }
     }
@@ -72,7 +65,6 @@ export const fetchCart = (cartState) => {
 };
 
 export const updateCart = (e, history) => {
-  console.log(e.target);
   let obj = {
     productId: e.target.dataset.id,
     orderId: e.target.dataset.orderid,
@@ -108,36 +100,34 @@ export const removeShoe = (e, history) => {
 
   if (!token) {
     return async (dispatch) => {
-
       cart.shoes.splice(cart.dictionary[e.target.dataset.id], 1);
       cart.dictionary[e.target.dataset.id] = undefined;
-      cart.shoes.map((shoe, index) =>{
+      cart.shoes.map((shoe, index) => {
         cart.dictionary[shoe.id] = index;
       });
       localStorage.setItem("cart", JSON.stringify(cart));
 
-        dispatch(REMOVE_SHOE_(e.target.dataset.id));
-        history.push(`/cart`);
-
+      dispatch(REMOVE_SHOE_(e.target.dataset.id));
+      history.push(`/cart`);
     };
-  } else{
+  } else {
     return async (dispatch) => {
       const { data: deleted } = await axios.delete(
         `/api/cart/${e.target.dataset.id}/${e.target.dataset.orderid}`
       );
       if (deleted) {
-  const cart = JSON.parse(window.localStorage.getItem("cart"));
+        const cart = JSON.parse(window.localStorage.getItem("cart"));
         let newCart = cart;
-        newCart.shoes = cart.shoes.filter(shoe => shoe.id != e.target.dataset.id)
-        console.log("deleted");
-      localStorage.setItem("cart", JSON.stringify(newCart));
+        newCart.shoes = cart.shoes.filter(
+          (shoe) => shoe.id != e.target.dataset.id
+        );
+        localStorage.setItem("cart", JSON.stringify(newCart));
 
         dispatch(REMOVE_SHOE_(e.target.dataset.id));
         history.push(`/cart`);
       }
     };
   }
-
 };
 
 export const completeOrder = () => {
@@ -156,8 +146,8 @@ export const completeOrder = () => {
 
 export const logoutCart = () => {
   return async (dispatch) => {
-      console.log("deleted");
-      dispatch(REMOVE_SHOE_(CLEAR_CART_()));
+    console.log("deleted");
+    dispatch(REMOVE_SHOE_(CLEAR_CART_()));
   };
 };
 

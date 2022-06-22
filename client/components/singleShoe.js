@@ -6,7 +6,6 @@ import { fetchSingleShoe } from '../store/singleShoe';
 class SingleShoe extends React.Component {
   constructor() {
     super();
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.addShoe = this.addShoe.bind(this);
 
   }
@@ -29,15 +28,6 @@ class SingleShoe extends React.Component {
           } else{
             updatingCart.shoes[updatingCart.dictionary[shoeId]].Product_Order.quantity = updatingCart.shoes[updatingCart.dictionary[shoeId]].Product_Order.quantity + 1
           }
-          // for(let i = 0; i< updatingCart.length; i++){
-          //   if(updatingCart[i].id == this.props.singleShoe.id){
-          //     updatingCart[i].Product_Order.quantity = updatingCart[i].Product_Order.quantity + 1
-          //     break;
-          //   }
-          //   if(i === updatingCart.length -1 ){
-          //     updatingCart.push({...this.props.singleShoe, Product_Order:{quantity: 0}});
-          //   }
-          // }
       localStorage.setItem('cart',
         JSON.stringify(updatingCart)
        )
