@@ -33,7 +33,7 @@ class SingleShoe extends React.Component {
       <div key={this.props.singleShoe.id}>
         <center>
           <h2>{this.props.singleShoe.name}</h2>
-          <img src={this.props.singleShoe.imageUrl} />
+          <img src={this.props.singleShoe.imageUrl} width={500}/>
           <p>description: {this.props.singleShoe.description}</p>
           <p>Price: {this.props.singleShoe.price}</p>
           <p>Available Size: {this.props.singleShoe.availableSize}</p>
