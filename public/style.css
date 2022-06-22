@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: wrgba(239, 249, 253, 0.867)
 }
 
 /* helps indicate that certain tag elements are clickable */
