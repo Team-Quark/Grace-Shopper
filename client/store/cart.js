@@ -13,9 +13,12 @@ const FETCH_CART = (cart) => ({
   cart,
 });
 
-export const logoutCart = () => ({
-  type: CLEAR_CART,
-});
+export const logoutCart = () => {
+  return (dispatch) =>
+    dispatch({
+      type: CLEAR_CART,
+    });
+};
 
 const UPDATE_CART_ = (cart) => ({
   type: UPDATE_CART,
@@ -50,12 +53,11 @@ export const fetchCart = () => {
         });
         dispatch(FETCH_CART(data.products));
       }
-    } else{
-      if(cart){
-        dispatch(FETCH_CART(cart));
+    } else {
+      if (cart) {
+        dispatch(FETCH_CART(cart.shoes));
       }
     }
-
   };
 };
 
@@ -67,41 +69,74 @@ export const updateCart = (e, history) => {
     userId: e.target.dataset.userid,
     quantity: e.target.dataset.quantity,
   };
-  return async (dispatch) => {
-    const { data } = await axios.put("/api/cart", obj);
-    dispatch(UPDATE_CART_(data.products));
-    alert("Cart Updated");
-    history.push(`/cart`);
-  };
+  const token = window.localStorage.getItem("token");
+  const cart = JSON.parse(window.localStorage.getItem("cart"));
+  if (!token) {
+    return async (dispatch) => {
+      cart.shoes[cart.dictionary[obj.productId]].Product_Order.quantity =
+        parseInt(obj.quantity);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      dispatch(UPDATE_CART_(cart.shoes));
+      alert("Cart Updated");
+      history.push(`/cart`);
+    };
+  } else {
+    return async (dispatch) => {
+      const { data } = await axios.put("/api/cart", obj);
+      dispatch(UPDATE_CART_(data.products));
+      alert("Cart Updated");
+      history.push(`/cart`);
+    };
+  }
 };
 
 export const removeShoe = (e, history) => {
   e.persist();
-  return async (dispatch) => {
-    const { data: deleted } = await axios.delete(
-      `/api/cart/${e.target.dataset.id}/${e.target.dataset.orderid}`
-    );
-    if (deleted) {
-      console.log("deleted");
-      dispatch(REMOVE_SHOE_(e.target.dataset.id));
-      history.push(`/cart`);
-    }
-  };
+  const token = window.localStorage.getItem("token");
+  const cart = JSON.parse(window.localStorage.getItem("cart"));
+
+  if (!token) {
+    return async (dispatch) => {
+
+      cart.shoes.splice(cart.dictionary[e.target.dataset.id], 1);
+      cart.dictionary[e.target.dataset.id] = undefined;
+      cart.shoes.map((shoe, index) =>{
+        cart.dictionary[shoe.id] = index;
+      });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+        dispatch(REMOVE_SHOE_(e.target.dataset.id));
+        history.push(`/cart`);
+
+    };
+  } else{
+    return async (dispatch) => {
+      const { data: deleted } = await axios.delete(
+        `/api/cart/${e.target.dataset.id}/${e.target.dataset.orderid}`
+      );
+      if (deleted) {
+        console.log("deleted");
+        dispatch(REMOVE_SHOE_(e.target.dataset.id));
+        history.push(`/cart`);
+      }
+    };
+  }
+
 };
 
 export const completeOrder = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
     const cart = window.localStorage.getItem("cart");
-    if(token){
-      const {data} = await axios.get('/api/checkout', {
+    if (token) {
+      const { data } = await axios.get("/api/checkout", {
         headers: {
-          authorization: token
-        }
+          authorization: token,
+        },
       });
     }
-  }
-}
+  };
+};
 
 const initialState = [];
 

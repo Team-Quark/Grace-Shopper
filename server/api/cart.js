@@ -23,22 +23,30 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.body.token);
-    const cart = await Order.findAll({
+    const cart = await Order.findOne({
       where: {
         userId: user.id,
         orderStatus: "Open",
       },
-      include: [Product],
+      include: {
+        model: Product,
+        through: "quantity",
+      },
     });
+
+
+
+
+
     const items = await Promise.all(
-      req.body.cart.map((item) => {
+      req.body.cart.shoes.map((item) => {
         return Product.findItem(item);
       })
     );
 
-    cart[0].addProduct(items[0]);
+    cart.addProduct(items[0]);
 
-    res.send(cart[0]);
+    res.send(cart);
 
 
   } catch (e) {
