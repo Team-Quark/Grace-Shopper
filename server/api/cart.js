@@ -7,14 +7,22 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    const cart = await Order.findAll({
+    const cart = await Order.findOne({
       where: {
         userId: user.id,
         orderStatus: "Open",
       },
-      include: [Product],
+      include: {
+        model: Product,
+        through: "quantity",
+      },
     });
-    res.json(cart[0]);
+    let cart2 = {
+      dictionary: {},
+      shoes: cart.products,
+    };
+    cart.products.map((shoe, index) => (cart2.dictionary[shoe.id] = index));
+    res.json(cart2);
   } catch (e) {
     next(e);
   }
@@ -22,23 +30,50 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
+    const guestCart = req.body.cart;
     const user = await User.findByToken(req.body.token);
-    const cart = await Order.findAll({
+    let cart = await Order.findOne({
       where: {
         userId: user.id,
         orderStatus: "Open",
       },
-      include: [Product],
+      include: {
+        model: Product,
+        through: "quantity",
+      },
     });
     const items = await Promise.all(
-      req.body.cart.map((item) => {
-        return Product.findItem(item);
+      guestCart.shoes.map((item) => {
+        cart.addProduct(item.id);
+        return Product_Order.update(
+          { quantity: item.Product_Order.quantity },
+          {
+            where: { productId: item.id, orderId: cart.id },
+          }
+        );
       })
     );
-
-    cart[0].addProduct(items[0]);
-
-    res.send(cart[0]);
+    const items2 = await Promise.all(
+      guestCart.shoes.map((item) => {
+        return Product_Order.update(
+          { quantity: item.Product_Order.quantity },
+          {
+            where: { productId: item.id, orderId: cart.id },
+          }
+        );
+      })
+    );
+    cart = await Order.findOne({
+      where: {
+        userId: user.id,
+        orderStatus: "Open",
+      },
+      include: {
+        model: Product,
+        through: "quantity",
+      },
+    });
+    res.json({ dictionary: guestCart.dictionary, shoes: cart.products });
   } catch (e) {
     next(e);
   }
@@ -57,17 +92,22 @@ router.put("/", async (req, res, next) => {
         where: { productId, orderId },
       }
     );
-    res.send(
-      await Order.findOne({
-        where: {
-          id: orderId,
-        },
-        include: {
-          model: Product,
-          through: "quantity",
-        },
-      })
-    );
+
+    const cart = await Order.findOne({
+      where: {
+        id: orderId,
+      },
+      include: {
+        model: Product,
+        through: "quantity",
+      },
+    });
+    let cart2 = {
+      dictionary: {},
+      shoes: cart.products,
+    };
+    cart.products.map((shoe, index) => (cart2.dictionary[shoe.id] = index));
+    res.send(cart2);
   } catch (e) {
     next(e);
   }

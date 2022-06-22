@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchAllShoes, fetchShoeType } from '../store/allshoes';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import {
+  Grid,
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@material-ui/core';
 
 const AllShoes = (props) => {
   const [shoes, setShoes] = useState([]);
@@ -43,21 +50,41 @@ const AllShoes = (props) => {
         <option value="basketball">Basketball</option>
         <option value="running">Running</option>
       </select>
-      <Button color="primary" onClick={resetFilter}>
-        Reset Filter
-      </Button>
-      {props.shoes.map((shoe) => {
-        return (
-          <div key={shoe.id}>
-            <Link to={`/shoes/${shoe.id}`}>
-              <h1>{shoe.name}</h1>
-              <h3>${shoe.price}</h3>
-              <h5>{shoe.description}</h5>
-              <img src={shoe.imageUrl} width={400} />
-            </Link>
-          </div>
-        );
-      })}
+      <button onClick={resetFilter}>Reset Filter</button>
+      <Box sx={{ flexGrow: 1, marginTop: '75px' }}>
+        <Grid container spacing={8} justifyContent="center">
+          {props.shoes.map((shoe) => {
+            return (
+              <Grid item key={shoe.id}>
+                <Card
+                  sx={{ maxWidth: 400, boxShadow: 2, margin: 15 }}
+                  component={Link}
+                  to={`/shoes/${shoe.id}`}
+                >
+                  <CardContent>
+                    <CardMedia
+                      component="img"
+                      style={{ width: 'auto', maxHeight: '400px' }}
+                      image={shoe.imageUrl}
+                    />
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="primary"
+                      gutterBottom
+                    >
+                      {shoe.name}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="primary">
+                      {shoe.price}
+                    </Typography>
+                    <Typography variant="body2">{shoe.description}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
     </div>
   );
 };

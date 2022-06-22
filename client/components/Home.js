@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 
 /**
@@ -11,6 +11,7 @@ export const Home = props => {
     <div>
       <h3>Welcome, {email}</h3>
     </div>
+
   )
 }
 

@@ -24,7 +24,7 @@ export const Checkout = (props) => {
                     </div>
                 )
             })}
-            <h3>Total Price: ${cart.reduce((prev,next) => prev + next.price,0)}</h3>
+            <h3>Total Price: ${cart.reduce((prev,next) => prev + (next.price * next.Product_Order.quantity),0)}</h3>
         </div>
     )
 }
