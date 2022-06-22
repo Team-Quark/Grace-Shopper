@@ -81,6 +81,12 @@ export class UpdateUser extends React.Component {
 
 const mapState = (state) => ({
   singleUser: state.singleUserReducer,
+  auth: state.auth,
+  intialValues: {
+    firstName: state.auth.firstName,
+    lastName: state.auth.lastName,
+    email: state.auth.email,
+  },
 });
 
 const mapDispatch = (dispatch, { history }) => ({

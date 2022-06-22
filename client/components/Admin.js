@@ -7,6 +7,8 @@ import { UpdateShoe } from './UpdateShoe';
 import { AddShoe } from './AddShoe';
 import { fetchdeleteShoe } from '../store/allshoes';
 import AddShoeForm from './AddUpdateShoe';
+import { List, Button, ListItem, Typography } from '@material-ui/core';
+import { SaveIcon } from '@material-ui/icons';
 
 //INCORPORATE ADMIN LOGIN REQUIRED ERROR MESSAGE WHEN NOT ADMIIN
 //INCORPORATE RETURN ADMIN STATUS ON LOGIN, TEST TO DISPLAY ADMIN TAB ON NAVBAR
@@ -52,29 +54,57 @@ const allUsers = () => {
     }
   };
 
-  // updateShoeHandler = (updateShoe) => shoes
-
   return (
     <div>
       {console.log('USERS IN RETURN: ', users)}
       {console.log('PRODUCTS IN RETURN: ', shoes)}
-      <h3>View all users</h3>
-      {users
-        ? users.map((user) => {
+      <h2 style={{ backgroundColor: 'lightblue' }}>VIEW ALL USERS</h2>
+
+      {users ? (
+        <List>
+          {users.map((user) => {
             return (
-              <div key={user.id}>
-                <div>{`Id: ${user.id}   Email: ${user.email}`}</div>
+              <ListItem key={user.id}>
+                <div>{`ID: ${user.id}   Email: ${user.email}`}</div>
+
                 <Link to={`/users/${user.id}/profile`}>
-                  <button type="button">Update User</button>
+                  <Button
+                    size="small"
+                    style={{
+                      fontsize: 6,
+                      backgroundColor: '#21b6ae',
+                      margin: '5px 36px',
+                    }}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Update User
+                  </Button>
                 </Link>
-              </div>
+              </ListItem>
             );
-          })
-        : 'test'}
-      <h3>View all Shoes</h3>
-      <button type="submit" onClick={() => setShowAddShoe(!showAddShoe)}>
+          })}
+        </List>
+      ) : (
+        'test'
+      )}
+      <h2 style={{ backgroundColor: 'lightblue' }}>VIEW ALL SHOES</h2>
+      {/* <button type="submit" onClick={() => setShowAddShoe(!showAddShoe)}> */}
+      <Button
+        size="medium"
+        style={{
+          fontsize: 15,
+          margin: '5px 36px',
+          backgroundColor: 'lightgreen',
+        }}
+        variant="contained"
+        onClick={() => setShowAddShoe(!showAddShoe)}
+        backgroundcolor="lightblue"
+      >
         Add Shoe
-      </button>
+      </Button>
+
+      {/* </button> */}
       {showAddShoe ? (
         <div>
           <div>-----</div>
@@ -83,31 +113,56 @@ const allUsers = () => {
       ) : (
         ''
       )}
-      {shoes
-        ? shoes.map((shoe) => {
+      {shoes ? (
+        <List>
+          {shoes.map((shoe) => {
             return (
-              <div key={shoe.id}>
+              // <div key={shoe.id}>
+
+              <ListItem key={shoe.id} style={{}}>
                 <div>
-                  {`Id: ${shoe.id}   Name: ${shoe.name}`}{' '}
+                  <div style={{ fontsize: 4, marginRight: '18px' }}>
+                    <h3>{`Id: ${shoe.id}   Name: ${shoe.name}`}</h3>
+                  </div>
+
                   {
                     <Link to={`/shoes/${shoe.id}/update`}>
-                      <button type="button">Update Shoe</button>
+                      <Button
+                        size="small"
+                        style={{ fontsize: 3, margin: '5px 36px' }}
+                        variant="contained"
+                        color="primary"
+                      >
+                        Update Shoe
+                      </Button>
                     </Link>
-                  }{' '}
+                  }
+                  <br />
                   {
-                    <button
-                      type="submit"
+                    <Button
+                      size="small"
+                      style={{
+                        fontsize: 3,
+                        backgroundColor: 'red',
+                        margin: '5px 36px',
+                      }}
+                      variant="contained"
                       onClick={() => deleteShoeHandler(shoe.id)}
                     >
-                      X
-                    </button>
+                      DELETE SHOE
+                    </Button>
                   }
-                  <button
-                    type="submit"
+                  <br />
+                  <Button
+                    size="small"
+                    style={{ fontsize: 3, margin: '5px 36px' }}
+                    variant="contained"
+                    color="primary"
                     onClick={() => setShowEditShoe(shoe.id)}
                   >
-                    Edit Shoe Test
-                  </button>
+                    EDIT SHOE
+                  </Button>
+                  <br />
                   {showEditShoe === shoe.id ? (
                     <div>
                       <div>-----</div>
@@ -122,10 +177,13 @@ const allUsers = () => {
                   <li>{`Description: ${shoe.description}`}</li>
                   <li>{`Image URL: ${shoe.imageUrl}`}</li>
                 </ul>
-              </div>
+              </ListItem>
             );
-          })
-        : 'test'}
+          })}
+        </List>
+      ) : (
+        'test'
+      )}
     </div>
   );
 };

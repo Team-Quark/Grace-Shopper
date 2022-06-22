@@ -120,11 +120,11 @@ async function seed() {
     },
   ];
   // Getting All the users added to the db
-  let  findAllUsers = await User.findAll({
+  let findAllUsers = await User.findAll({
     include: {
       model: Order,
-      include: Product
-    }
+      include: Product,
+    },
   });
 
   // Creating Payment Options (associates random user to payment)
@@ -146,16 +146,15 @@ async function seed() {
   console.log(`seeded Payments successfully`);
 
   // Creating Products
- const jordans = await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/296982/1.jpg',
+  const jordans = await Product.create({
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/296982/1.jpg',
     name: 'Jordan 4 Retro Infrared',
     price: 172,
     availableSize: 7,
     description: 'Lorem Ipsum',
   });
 
- const yeezys = await Product.create({
+  const yeezys = await Product.create({
     imageUrl:
       'https://images.stockx.com/images/adidas-yeezy-boost-700-hi-red-red.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=avif&auto=compress&dpr=1&trim=color&updated_at=1655130455&q=80',
     name: 'adidas Yeezy Boost 700 Hi-Res Red',
@@ -165,8 +164,7 @@ async function seed() {
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/299069/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/299069/1.jpg',
     name: ' Jordan 1 Retro High OG Stage Haze ',
     price: 200,
     availableSize: 12,
@@ -174,8 +172,7 @@ async function seed() {
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/800502/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/800502/1.jpg',
     name: 'adidas Yeezy Boost 350 V2 Zebra',
     price: 282,
     availableSize: 15,
@@ -192,8 +189,7 @@ async function seed() {
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/253246/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/253246/1.jpg',
     name: `Nike Air Force 1 Low '07 Black`,
     price: 100,
     availableSize: 11,
@@ -201,8 +197,7 @@ async function seed() {
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/294004/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/294004/1.jpg',
     name: `Nike KD 14 Aunt Pearl`,
     price: 132,
     availableSize: 11,
@@ -210,8 +205,7 @@ async function seed() {
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/313749/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/313749/1.jpg',
     name: `Nike Air Max 1 Kasina Won-Ang Orange`,
     price: 196,
     availableSize: 12,
@@ -237,122 +231,109 @@ async function seed() {
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/253215/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/253215/1.jpg',
     name: `Dunk Low - Panda (Black/White)`,
     price: 200,
     availableSize: 11,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/299345/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/299345/1.jpg',
     name: `Yeezy Boost 350 V2 'Bone'`,
     price: 300,
     availableSize: 10,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
 
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/303273/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/303273/1.jpg',
     name: `Yeezy Foam Runner 'Onyx'`,
     price: 150,
     availableSize: 13,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/801866/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/801866/1.jpg',
     name: `Off-White X Air Vapormax`,
     price: 800,
     availableSize: 10,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/248952/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/248952/1.jpg',
     name: `Air Jordan 11 Retro 'Cool Grey'`,
     price: 150,
     availableSize: 6,
     description: 'Lorem Ipsum',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/296986/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/296986/1.jpg',
     name: `Dunk Low - Rose Whisper`,
     price: 150,
     availableSize: 10,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/802501/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/802501/1.jpg',
     name: `Yeezy Boost 700 - Wave Runner`,
     price: 400,
     availableSize: 10,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/296515/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/296515/1.jpg',
     name: `Yeezy Boost 350 V2 'Onyx'`,
     price: 350,
     availableSize: 10,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/246152/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/246152/1.jpg',
     name: `Air Jordan 1 Retro Low OG 'Starfish'`,
     price: 200,
     availableSize: 8,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/302235/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/302235/1.jpg',
     name: `Nike GT Cut 'Pure PLatinum Pink Blast'`,
     price: 400,
     availableSize: 7,
     description: 'Lorem Ipsum',
-    shoeType: 'basketball'
+    shoeType: 'basketball',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/150565/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/150565/1.jpg',
     name: `Kyrie 5 - Spongebob`,
     price: 300,
     availableSize: 10,
     description: 'Lorem Ipsum',
-    shoeType: 'basketball'
+    shoeType: 'basketball',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/1800/TEMPLATE/299066/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/1800/TEMPLATE/299066/1.jpg',
     name: `Air Jordan 4 - 'Military Black`,
     price: 300,
     availableSize: 8,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
   await Product.create({
-    imageUrl:
-      'https://cdn.flightclub.com/750/TEMPLATE/176533/1.jpg',
+    imageUrl: 'https://cdn.flightclub.com/750/TEMPLATE/176533/1.jpg',
     name: `Air Jordan 1 - Dior`,
     price: 9000,
     availableSize: 8,
     description: 'Lorem Ipsum',
-    shoeType: 'running'
+    shoeType: 'running',
   });
 
   for (let prId = 0; prId < 11; prId++) {
@@ -361,7 +342,7 @@ async function seed() {
       price: 200,
       availableSize: Math.floor(Math.random() * 8) + 7,
       description: 'Lorem Ipsum',
-      shoeType: ['running', 'basketball'][Math.floor(Math.random() * 2)]
+      shoeType: ['running', 'basketball'][Math.floor(Math.random() * 2)],
     });
   }
 
@@ -388,18 +369,18 @@ async function seed() {
   //     findAllUsers[Math.floor(Math.random() * findAllUsers.length)];
 
   //   // the first user cody (Line 18) will have this cart
-    // if(oId === 0){
-    //  const order1 = await Order.create({
-    //     shippingAddress: cody.address,
-    //     orderStatus: 'Open',
-    //     confirmCode: randomConfirmCode(),
-    //   });
-    //   order1.addProducts([jordans, yeezys], {
-    //     through: {
-    //        quantity: 1
-    //     }
-    //   });
-    //   cody.addOrder(order1)
+  // if(oId === 0){
+  //  const order1 = await Order.create({
+  //     shippingAddress: cody.address,
+  //     orderStatus: 'Open',
+  //     confirmCode: randomConfirmCode(),
+  //   });
+  //   order1.addProducts([jordans, yeezys], {
+  //     through: {
+  //        quantity: 1
+  //     }
+  //   });
+  //   cody.addOrder(order1)
 
   //   }else {
   //     await Order.create({
@@ -411,24 +392,24 @@ async function seed() {
   //     });
   //   }
   // }
-  for(let oId = 1; oId < 10; oId++){
-    if(oId === 1){
+  for (let oId = 1; oId < 10; oId++) {
+    if (oId === 1) {
       const order1 = await Order.create({
-         shippingAddress: cody.address,
-         orderStatus: 'Open',
-         confirmCode: randomConfirmCode(),
-       });
-       order1.addProducts([jordans, yeezys], {
-         through: {
-            quantity: 1
-         }
-       });
-       cody.addOrder(order1)
+        shippingAddress: cody.address,
+        orderStatus: 'Open',
+        confirmCode: randomConfirmCode(),
+      });
+      order1.addProducts([jordans, yeezys], {
+        through: {
+          quantity: 1,
+        },
+      });
+      cody.addOrder(order1);
     } else {
-      const user = findAllUsers[oId]
+      const user = findAllUsers[oId];
       const order = await Order.create({
         shippingAddress: user.address,
-        confirmCode: randomConfirmCode()
+        confirmCode: randomConfirmCode(),
       });
 
       user.addOrder(order);
@@ -436,7 +417,7 @@ async function seed() {
   }
 
   console.log(`seeded Orders successfully`);
-// Typical Sequel querying
+  // Typical Sequel querying
   // let findCody = await User.findOne({
   //   where: {
   //     id: 1
@@ -451,18 +432,17 @@ async function seed() {
   //     }
   //   }
   // });
-// testing out Sequelize mixins ()
+  // testing out Sequelize mixins ()
   let findCody = await cody.getOrders({
-    include:{
+    include: {
       model: Product,
       attributes: ['price'],
       // joinTableAttributes: ['quantity']
       through: {
-        attributes: ['quantity']
-
-      }
+        attributes: ['quantity'],
+      },
     },
-  } )
+  });
 
   // Will return to web scraping - Sheriff
 
