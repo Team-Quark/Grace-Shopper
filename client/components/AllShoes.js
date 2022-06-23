@@ -9,6 +9,7 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  Snackbar
 } from '@material-ui/core';
 
 const AllShoes = (props) => {
@@ -57,14 +58,14 @@ const AllShoes = (props) => {
             return (
               <Grid item key={shoe.id}>
                 <Card
-                  sx={{ maxWidth: 400, boxShadow: 2, margin: 15 }}
+                  sx={{ maxWidth: 300, boxShadow: 2, margin: 15 }}
                   component={Link}
                   to={`/shoes/${shoe.id}`}
                 >
                   <CardContent>
                     <CardMedia
                       component="img"
-                      style={{ width: 'auto', maxHeight: '400px' }}
+                      style={{ width: 'auto', maxHeight: '300px' }}
                       image={shoe.imageUrl}
                     />
                     <Typography
@@ -75,7 +76,7 @@ const AllShoes = (props) => {
                       {shoe.name}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="primary">
-                      {shoe.price}
+                      ${shoe.price} USD
                     </Typography>
                     <Typography variant="body2">{shoe.description}</Typography>
                   </CardContent>
