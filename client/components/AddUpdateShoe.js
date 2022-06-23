@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-export default (shoeData) => {
+const addShoeForm = (shoeData) => {
   //console.log(shoeData.shoeData);
   const [name, setName] = useState(shoeData.shoeData.name || '');
   const [description, setDescription] = useState(
@@ -12,6 +12,7 @@ export default (shoeData) => {
   // let [dbSuccess, setDbSuccess] = useState(true);
 
   const addEditShoeHandler = async () => {
+    let history = useHistory();
     const newShoe = {
       name: name,
       description: description,
@@ -32,6 +33,7 @@ export default (shoeData) => {
           authorization: window.localStorage.getItem('token'),
           newShoe,
         });
+
         // console.log('RESRESRESRESRES', res.status);
         // if (res.status === 201) {
         //   console.log('if statement for success has triggered');
@@ -45,6 +47,7 @@ export default (shoeData) => {
         console.error(error);
       }
     }
+    history.push('/users');
   };
 
   return (
@@ -81,3 +84,5 @@ export default (shoeData) => {
     </>
   );
 };
+
+export default addShoeForm;
